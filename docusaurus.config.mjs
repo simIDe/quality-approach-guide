@@ -33,7 +33,7 @@ const config = {
       ({
         docs: {
           routeBasePath: '/',
-          sidebarPath: './sidebars.js',
+          sidebarPath: './sidebars.mjs',
           editUrl: `${repo}/edit/main/`,
           showLastUpdateTime: true,
         },
