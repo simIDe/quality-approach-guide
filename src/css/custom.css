@@ -1,0 +1,20 @@
+/* Thème sobre : couleurs par défaut d'Infima, texte un peu plus large. */
+:root {
+  --ifm-color-primary: #2e5c8a;
+  --ifm-color-primary-dark: #29537c;
+  --ifm-color-primary-darker: #274e75;
+  --ifm-color-primary-darkest: #204060;
+  --ifm-color-primary-light: #336598;
+  --ifm-color-primary-lighter: #356a9f;
+  --ifm-color-primary-lightest: #3c78b4;
+  --ifm-code-font-size: 95%;
+}
+[data-theme='dark'] {
+  --ifm-color-primary: #7aa7d6;
+  --ifm-color-primary-dark: #5f95ce;
+  --ifm-color-primary-darker: #528cca;
+  --ifm-color-primary-darkest: #3672b2;
+  --ifm-color-primary-light: #95b9de;
+  --ifm-color-primary-lighter: #a2c2e2;
+  --ifm-color-primary-lightest: #cbdcef;
+}

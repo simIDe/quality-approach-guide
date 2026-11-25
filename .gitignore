@@ -1,0 +1,16 @@
+# Site
+node_modules/
+build/
+.docusaurus/
+.cache-loader/
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+# Fichiers générés par l'exemple (recréés par le pipeline)
+exemples/charge-entrainement/data/
+exemples/charge-entrainement/sortie/
+# Système
+.DS_Store
+Thumbs.db

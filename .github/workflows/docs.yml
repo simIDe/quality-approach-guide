@@ -1,0 +1,49 @@
+# Site de documentation : construit à chaque pull request, publié à chaque fusion sur main.
+name: Site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Une seule publication à la fois ; une publication en cours n'est pas annulée.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # pour la date de dernière mise à jour des pages
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Vérifier que chaque page est dans la navigation
+        run: node scripts/verifier-navigation.mjs
+      - name: Construire le site (échoue sur un lien ou une ancre cassés)
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: build
+
+  publier:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: construire
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v5
