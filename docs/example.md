@@ -1,52 +1,52 @@
 ---
-title: L'exemple
+title: The example
 ---
 
-# L'exemple : charge d'entraînement hebdomadaire
+# The example: weekly training load
 
-Le dossier [`exemples/charge-entrainement/`](https://github.com/simIDe/quality-approach-guide/tree/main/exemples/charge-entrainement) contient un *data product* (produit de données : des données préparées pour un utilisateur et une décision précis) minimal, qui tourne de bout en bout avec une seule commande. Il se lit en vingt minutes : moins de 300 lignes de Python, tests compris.
+The [`examples/training-load/`](https://github.com/simIDe/quality-approach-guide/tree/main/examples/training-load) folder contains a minimal *data product* (data prepared for a specific user and decision) that runs end to end with a single command. It can be read in twenty minutes: under 300 lines of Python, tests included.
 
-Il montre une façon de faire, pas la seule. Votre projet peut utiliser d'autres outils et une autre organisation.
+It shows one way of doing things, not the only one. Your project can use other tools and a different organisation.
 
-## Ce que fait l'exemple
+## What the example does
 
-L'utilisateur est l'entraîneur d'un club de course à pied. Il reçoit un rapport avec une ligne par athlète et par semaine sur huit semaines, et la charge de chaque semaine : effort perçu (0 à 10) × durée en minutes.
+The user is the coach of a running club. He receives a report with one row per athlete and per week over eight weeks, and the load for each week: perceived effort (0 to 10) × duration in minutes.
 
-1. [`generer.py`](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/generer.py) crée un CSV de séances synthétiques, avec une graine fixe et une date de fin fixe : le fichier est le même à chaque lancement. Les athlètes (A01 à A06) sont fictifs.
-2. [`pipeline.py`](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/pipeline.py) charge le CSV dans SQLite, nettoie les séances et calcule la table hebdomadaire en SQL.
-3. [`controles.py`](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/controles.py) contrôle les séances brutes selon les cinq dimensions : exactitude, complétude, fraîcheur, cohérence, unicité.
-4. [`lancer.py`](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/lancer.py) enchaîne les étapes et écrit le rapport Markdown.
+1. [`generate.py`](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/generate.py) creates a CSV of synthetic sessions, with a fixed seed and a fixed end date: the file is the same on every run. The athletes (A01 to A06) are fictitious.
+2. [`pipeline.py`](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/pipeline.py) loads the CSV into SQLite, cleans the sessions and computes the weekly table in SQL.
+3. [`checks.py`](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/checks.py) checks the raw sessions against the five dimensions: accuracy, completeness, timeliness, consistency, uniqueness.
+4. [`run.py`](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/run.py) chains the steps and writes the Markdown report.
 
-## Les quatre défauts et leur traitement
+## The four defects and how they are handled
 
-Le générateur introduit volontairement quatre défauts. Chacun est détecté par un contrôle, puis traité d'une des trois façons possibles : corrigé, exclu ou signalé.
+The generator deliberately introduces four defects. Each one is detected by a check, then handled in one of the three possible ways: corrected, excluded or flagged.
 
-| Défaut | Contrôle qui le détecte | Traitement |
+| Defect | Check that detects it | Handling |
 | --- | --- | --- |
-| Trois durées saisies en heures au lieu de minutes | **cohérence** : toutes les durées doivent être en minutes, donc au moins 10 | corrigé : durée × 60 |
-| Une semaine sans séance pour l'athlète A03 | **complétude** : huit semaines attendues par athlète | signalé : la semaine manque au tableau, aucune charge n'est inventée |
-| Une séance saisie deux fois | **unicité** : une séance par athlète et par jour | exclu : un seul exemplaire est gardé |
-| Un effort perçu de 14 | **exactitude** : l'effort doit être entre 0 et 10 | exclu : la vraie valeur est inconnue |
+| Three durations entered in hours instead of minutes | **consistency**: all durations must be in minutes, so at least 10 | corrected: duration × 60 |
+| One week without sessions for athlete A03 | **completeness**: eight weeks expected per athlete | flagged: the week is missing from the table, no load is made up |
+| One session entered twice | **uniqueness**: one session per athlete per day | excluded: only one copy is kept |
+| A perceived effort of 14 | **accuracy**: effort must be between 0 and 10 | excluded: the real value is unknown |
 
-Le contrôle de **fraîcheur** vérifie que la dernière séance date de moins de sept jours avant la date de fin. Il passe : un contrôle qui ne trouve rien est aussi une information.
+The **timeliness** check verifies that the last session is less than seven days before the end date. It passes: a check that finds nothing is information too.
 
-Le rapport reprend ce tableau, liste chaque anomalie trouvée, puis donne la table hebdomadaire. Un test, dans [`tests/test_exemple.py`](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/tests/test_exemple.py), échoue si l'un des quatre défauts n'est plus détecté.
+The report repeats this table, lists each anomaly found, then gives the weekly table. A test, in [`tests/test_example.py`](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/tests/test_example.py), fails if any of the four defects is no longer detected.
 
-## Le lancer chez vous
+## Running it yourself
 
-Avec Python 3.11 ou plus récent et [uv](https://docs.astral.sh/uv/), depuis la racine du dépôt cloné :
+With Python 3.11 or later and [uv](https://docs.astral.sh/uv/), from the root of the cloned repository:
 
 ```bash
-uv run python exemples/charge-entrainement/lancer.py
+uv run python examples/training-load/run.py
 uv run pytest -q
 ```
 
-Le rapport est écrit dans `exemples/charge-entrainement/sortie/rapport.md`. Le [README de l'exemple](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/README.md) donne aussi l'équivalent avec pip et venv.
+The report is written to `examples/training-load/output/report.md`. The [example's README](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/README.md) also gives the equivalent with pip and venv.
 
-À chaque pull request (proposition de modification relue avant d'être fusionnée), le workflow [`exemple.yml`](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/exemple.yml) relance la commande et les tests sur Linux, Windows et macOS.
+On every pull request (a proposed change reviewed before being merged), the [`example.yml`](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/example.yml) workflow reruns the command and the tests on Linux, Windows and macOS.
 
-## Les documents qui l'accompagnent
+## The documents that come with it
 
-- [Fiche produit](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/fiche-produit.md) : pour qui, pour quelle décision, ce qui est garanti et ce qui ne l'est pas.
-- [Dictionnaire de données](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/dictionnaire-de-donnees.md) : chaque colonne de chaque table.
-- [Journal de méthode](https://github.com/simIDe/quality-approach-guide/blob/main/exemples/charge-entrainement/journal-de-methode.md) (extrait) : les décisions, l'usage de l'IA, ce qu'on referait autrement.
+- [Product sheet](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/product-sheet.md): for whom, for which decision, what is guaranteed and what is not.
+- [Data dictionary](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/data-dictionary.md): every column of every table.
+- [Method log](https://github.com/simIDe/quality-approach-guide/blob/main/examples/training-load/method-log.md) (excerpt): the decisions, the use of AI, what we would do differently.
