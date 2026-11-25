@@ -21,10 +21,10 @@ Chaque fiche répond à une question et se lit en cinq minutes.
 
 | Fiche | Question à laquelle elle répond |
 | --- | --- |
-| 01 Collaborer sur GitHub | Comment travailler à trois sur le même code sans se marcher dessus ? |
-| 02 Contrôler des données | Comment savoir si mes données sont bonnes ? |
-| 03 Rendre un projet relançable | Quelqu'un d'autre peut-il relancer mon projet ? |
-| 04 Automatiser une vérification | Comment faire tourner mes contrôles tout seuls ? |
-| 05 Publier une version | Comment dire « ceci est la version livrée » ? |
-| 06 Travailler avec un agent | Comment utiliser un agent de code sans perdre la main ? |
-| 07 Données personnelles | Ai-je le droit d'utiliser ces données ? |
+| [01 Collaborer sur GitHub](./fiches/01-collaborer-sur-github.md) | Comment travailler à trois sur le même code sans se marcher dessus ? |
+| [02 Contrôler des données](./fiches/02-controler-des-donnees.md) | Comment savoir si mes données sont bonnes ? |
+| [03 Rendre un projet relançable](./fiches/03-rendre-un-projet-relancable.md) | Quelqu'un d'autre peut-il relancer mon projet ? |
+| [04 Automatiser une vérification](./fiches/04-automatiser-une-verification.md) | Comment faire tourner mes contrôles tout seuls ? |
+| [05 Publier une version](./fiches/05-publier-une-version.md) | Comment dire « ceci est la version livrée » ? |
+| [06 Travailler avec un agent](./fiches/06-travailler-avec-un-agent.md) | Comment utiliser un agent de code sans perdre la main ? |
+| [07 Données personnelles](./fiches/07-donnees-personnelles.md) | Ai-je le droit d'utiliser ces données ? |
