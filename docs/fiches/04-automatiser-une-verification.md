@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7        # récupère le code du dépôt
-      - uses: astral-sh/setup-uv@v10     # installe uv
+      - uses: astral-sh/setup-uv@v10.4.0 # installe uv (version exacte)
       - run: uv sync                     # installe les dépendances figées (uv.lock)
       - run: uv run pytest -q            # lance les tests ; un échec fait échouer le workflow
 ```
