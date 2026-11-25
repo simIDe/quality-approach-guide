@@ -10,7 +10,7 @@ const sidebars = {
       type: 'category',
       label: 'Le mini-projet',
       collapsed: false,
-      items: ['brief', 'attendus-et-evaluation'],
+      items: ['brief', 'attendus-et-evaluation', 'idees-de-projets'],
     },
     {
       type: 'category',
