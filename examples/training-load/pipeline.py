@@ -1,50 +1,50 @@
-"""Charge le CSV dans SQLite, nettoie les séances et calcule la charge hebdomadaire."""
+"""Load the CSV into SQLite, clean the sessions and compute the weekly load."""
 import csv
 
-# Une durée sous 10 « minutes » n'est pas une séance : elle a été saisie en heures.
-SEUIL_HEURES = 10
+# A duration under 10 "minutes" is not a session: it was entered in hours.
+HOURS_THRESHOLD = 10
 
-NETTOYAGE = f"""
-DROP TABLE IF EXISTS seances;
-CREATE TABLE seances AS
-SELECT DISTINCT                          -- unicité : un doublon exact est exclu
-    athlete,
+CLEANING = f"""
+DROP TABLE IF EXISTS sessions;
+CREATE TABLE sessions AS
+SELECT DISTINCT                          -- uniqueness: an exact duplicate is excluded
+    athlete_id,
     date,
-    CASE WHEN duree < {SEUIL_HEURES} THEN duree * 60 ELSE duree END
-        AS duree_min,                    -- cohérence : heures converties en minutes
+    CASE WHEN duration < {HOURS_THRESHOLD} THEN duration * 60 ELSE duration END
+        AS duration_min,                 -- consistency: hours converted to minutes
     rpe
-FROM seances_brutes
-WHERE rpe BETWEEN 0 AND 10;              -- exactitude : effort hors échelle exclu
+FROM raw_sessions
+WHERE rpe BETWEEN 0 AND 10;              -- accuracy: out-of-scale exertion excluded
 """
 
-HEBDOMADAIRE = """
-DROP TABLE IF EXISTS charge_hebdo;
-CREATE TABLE charge_hebdo AS
+WEEKLY = """
+DROP TABLE IF EXISTS weekly_load;
+CREATE TABLE weekly_load AS
 SELECT
-    athlete,
-    date(date, 'weekday 0', '-6 days') AS semaine,  -- lundi de la semaine
-    COUNT(*) AS nb_seances,
-    SUM(duree_min) AS minutes,
-    SUM(rpe * duree_min) AS charge                  -- effort perçu × minutes
-FROM seances
-GROUP BY athlete, semaine
-ORDER BY athlete, semaine;
+    athlete_id,
+    date(date, 'weekday 0', '-6 days') AS week,  -- Monday of the week
+    COUNT(*) AS n_sessions,
+    SUM(duration_min) AS minutes,
+    SUM(rpe * duration_min) AS load              -- perceived exertion × minutes
+FROM sessions
+GROUP BY athlete_id, week
+ORDER BY athlete_id, week;
 """
 
 
-def charger(chemin_csv, connexion):
-    """Copie le CSV tel quel dans la table seances_brutes."""
-    with open(chemin_csv, newline="", encoding="utf-8") as fichier:
-        lignes = [(l["athlete"], l["date"], float(l["duree"]), int(l["rpe"]))
-                  for l in csv.DictReader(fichier)]
-    connexion.executescript("""
-        DROP TABLE IF EXISTS seances_brutes;
-        CREATE TABLE seances_brutes (athlete TEXT, date TEXT, duree REAL, rpe INTEGER);
+def load(csv_path, connection):
+    """Copy the CSV as is into the raw_sessions table."""
+    with open(csv_path, newline="", encoding="utf-8") as file:
+        rows = [(r["athlete_id"], r["date"], float(r["duration"]), int(r["rpe"]))
+                for r in csv.DictReader(file)]
+    connection.executescript("""
+        DROP TABLE IF EXISTS raw_sessions;
+        CREATE TABLE raw_sessions (athlete_id TEXT, date TEXT, duration REAL, rpe INTEGER);
     """)
-    connexion.executemany("INSERT INTO seances_brutes VALUES (?, ?, ?, ?)", lignes)
-    connexion.commit()
+    connection.executemany("INSERT INTO raw_sessions VALUES (?, ?, ?, ?)", rows)
+    connection.commit()
 
 
-def transformer(connexion):
-    """Construit la table seances (nettoyée) puis la table charge_hebdo."""
-    connexion.executescript(NETTOYAGE + HEBDOMADAIRE)
+def transform(connection):
+    """Build the (cleaned) sessions table, then the weekly_load table."""
+    connection.executescript(CLEANING + WEEKLY)

@@ -1,62 +1,62 @@
-"""Tests de l'exemple : génération, transformation, contrôles et rapport."""
+"""Tests of the example: generation, transformation, checks and report."""
 import sqlite3
 
 import pytest
 
-from controles import controler
-from generer import DATE_FIN, ecrire_csv, generer_seances, seances_propres
-from lancer import executer
-from pipeline import charger, transformer
+from checks import run_checks
+from generate import END_DATE, clean_sessions, generate_sessions, write_csv
+from pipeline import load, transform
+from run import run
 
 
 @pytest.fixture
-def connexion():
+def connection():
     cx = sqlite3.connect(":memory:")
     yield cx
     cx.close()
 
 
-def charger_lignes(lignes, connexion, tmp_path):
-    charger(ecrire_csv(lignes, tmp_path / "seances.csv"), connexion)
+def load_rows(rows, connection, tmp_path):
+    load(write_csv(rows, tmp_path / "sessions.csv"), connection)
 
 
-def test_generation_reproductible():
-    assert generer_seances() == generer_seances()
+def test_generation_is_reproducible():
+    assert generate_sessions() == generate_sessions()
 
 
-def test_les_quatre_defauts_sont_detectes(connexion, tmp_path):
-    charger_lignes(generer_seances(), connexion, tmp_path)
-    resultats = {c.dimension: c for c in controler(connexion, DATE_FIN)}
-    echecs = {dimension for dimension, c in resultats.items() if not c.ok}
-    assert echecs == {"exactitude", "cohérence", "complétude", "unicité"}
-    assert len(resultats["cohérence"].anomalies) == 3  # durées en heures
-    assert len(resultats["exactitude"].anomalies) == 1  # effort perçu hors échelle
-    assert len(resultats["unicité"].anomalies) == 1  # séance en double
-    assert "A03" in resultats["complétude"].anomalies[0]  # semaine manquante
-    assert resultats["fraîcheur"].ok
+def test_the_four_defects_are_detected(connection, tmp_path):
+    load_rows(generate_sessions(), connection, tmp_path)
+    results = {c.dimension: c for c in run_checks(connection, END_DATE)}
+    failures = {dimension for dimension, c in results.items() if not c.ok}
+    assert failures == {"accuracy", "consistency", "completeness", "uniqueness"}
+    assert len(results["consistency"].anomalies) == 3  # durations in hours
+    assert len(results["accuracy"].anomalies) == 1  # perceived exertion out of scale
+    assert len(results["uniqueness"].anomalies) == 1  # duplicated session
+    assert "A03" in results["completeness"].anomalies[0]  # missing week
+    assert results["timeliness"].ok
 
 
-def test_donnees_propres_sans_anomalie(connexion, tmp_path):
-    charger_lignes(seances_propres(), connexion, tmp_path)
-    assert all(c.ok for c in controler(connexion, DATE_FIN))
+def test_clean_data_has_no_anomaly(connection, tmp_path):
+    load_rows(clean_sessions(), connection, tmp_path)
+    assert all(c.ok for c in run_checks(connection, END_DATE))
 
 
-def test_transformation_corrige_exclut_et_calcule_la_charge(connexion, tmp_path):
-    lignes = [
-        {"athlete": "A01", "date": "2026-11-16", "duree": 60, "rpe": 5},
-        {"athlete": "A01", "date": "2026-11-16", "duree": 60, "rpe": 5},  # doublon
-        {"athlete": "A01", "date": "2026-11-18", "duree": 0.5, "rpe": 4},  # en heures
-        {"athlete": "A01", "date": "2026-11-20", "duree": 40, "rpe": 12},  # hors échelle
-        {"athlete": "A01", "date": "2026-11-22", "duree": 30, "rpe": 2},  # dimanche
+def test_transform_corrects_excludes_and_computes_the_load(connection, tmp_path):
+    rows = [
+        {"athlete_id": "A01", "date": "2026-11-16", "duration": 60, "rpe": 5},
+        {"athlete_id": "A01", "date": "2026-11-16", "duration": 60, "rpe": 5},  # duplicate
+        {"athlete_id": "A01", "date": "2026-11-18", "duration": 0.5, "rpe": 4},  # in hours
+        {"athlete_id": "A01", "date": "2026-11-20", "duration": 40, "rpe": 12},  # out of scale
+        {"athlete_id": "A01", "date": "2026-11-22", "duration": 30, "rpe": 2},  # Sunday
     ]
-    charger_lignes(lignes, connexion, tmp_path)
-    transformer(connexion)
-    semaines = connexion.execute("SELECT * FROM charge_hebdo").fetchall()
-    # 5×60 + 4×30 + 2×30 = 480 ; le dimanche appartient à la semaine du lundi 16.
-    assert semaines == [("A01", "2026-11-16", 3, 120.0, 480.0)]
+    load_rows(rows, connection, tmp_path)
+    transform(connection)
+    weeks = connection.execute("SELECT * FROM weekly_load").fetchall()
+    # 5×60 + 4×30 + 2×30 = 480; the Sunday belongs to the week of Monday the 16th.
+    assert weeks == [("A01", "2026-11-16", 3, 120.0, 480.0)]
 
 
-def test_le_rapport_dit_comment_chaque_defaut_est_traite(tmp_path):
-    texte = executer(tmp_path).read_text(encoding="utf-8")
-    assert all(mot in texte for mot in ["corrigé", "exclu", "signalé"])
-    assert "| A01 | 2026-09-28 |" in texte
+def test_the_report_says_how_each_defect_is_handled(tmp_path):
+    text = run(tmp_path).read_text(encoding="utf-8")
+    assert all(word in text for word in ["corrected", "excluded", "flagged"])
+    assert "| A01 | 2026-09-28 |" in text
