@@ -1,37 +1,37 @@
-# Dictionnaire de données
+# Data dictionary
 
-Les trois tables de la base SQLite `sortie/charge.sqlite`, recréée à chaque lancement de `lancer.py`.
+The three tables of the SQLite database `output/training_load.sqlite`, recreated on every run of `run.py`.
 
-## seances_brutes
+## raw_sessions
 
-Copie du fichier `data/seances.csv`, sans aucune modification. Les contrôles qualité portent sur cette table.
+Copy of the file `data/sessions.csv`, without any change. The quality checks run on this table.
 
-| Colonne | Type | Unité | Définition | Valeurs possibles | Source |
+| Column | Type | Unit | Definition | Possible values | Source |
 | --- | --- | --- | --- | --- | --- |
-| athlete | TEXT | — | Identifiant fictif de l'athlète | A01 à A06 | `data/seances.csv` |
-| date | TEXT | jour (AAAA-MM-JJ) | Date de la séance | du 2026-09-28 au 2026-11-22 | `data/seances.csv` |
-| duree | REAL | minutes, parfois heures par erreur | Durée de la séance telle que saisie | 30 à 100 attendu ; sous 10, la valeur est en heures | `data/seances.csv` |
-| rpe | INTEGER | point d'échelle | Effort perçu déclaré par l'athlète (RPE, *rating of perceived exertion*) | 0 à 10 attendu ; toute autre valeur est une erreur | `data/seances.csv` |
+| athlete_id | TEXT | — | Fictional identifier of the athlete | A01 to A06 | `data/sessions.csv` |
+| date | TEXT | day (YYYY-MM-DD) | Date of the session | from 2026-09-28 to 2026-11-22 | `data/sessions.csv` |
+| duration | REAL | minutes, sometimes hours by mistake | Duration of the session as entered | 30 to 100 expected; under 10, the value is in hours | `data/sessions.csv` |
+| rpe | INTEGER | scale point | Perceived exertion reported by the athlete (RPE, *rating of perceived exertion*) | 0 to 10 expected; any other value is an error | `data/sessions.csv` |
 
-## seances
+## sessions
 
-Séances nettoyées : doublons exacts exclus, durées en heures converties, efforts hors échelle exclus.
+Cleaned sessions: exact duplicates excluded, durations in hours converted, out-of-scale exertions excluded.
 
-| Colonne | Type | Unité | Définition | Valeurs possibles | Source |
+| Column | Type | Unit | Definition | Possible values | Source |
 | --- | --- | --- | --- | --- | --- |
-| athlete | TEXT | — | Identifiant fictif de l'athlète | A01 à A06 | `seances_brutes.athlete` |
-| date | TEXT | jour (AAAA-MM-JJ) | Date de la séance | du 2026-09-28 au 2026-11-22 | `seances_brutes.date` |
-| duree_min | REAL | minutes | Durée de la séance, convertie en minutes si elle était saisie en heures | 10 et plus | `seances_brutes.duree` |
-| rpe | INTEGER | point d'échelle | Effort perçu | 0 à 10 | `seances_brutes.rpe` |
+| athlete_id | TEXT | — | Fictional identifier of the athlete | A01 to A06 | `raw_sessions.athlete_id` |
+| date | TEXT | day (YYYY-MM-DD) | Date of the session | from 2026-09-28 to 2026-11-22 | `raw_sessions.date` |
+| duration_min | REAL | minutes | Duration of the session, converted to minutes if it was entered in hours | 10 and above | `raw_sessions.duration` |
+| rpe | INTEGER | scale point | Perceived exertion | 0 to 10 | `raw_sessions.rpe` |
 
-## charge_hebdo
+## weekly_load
 
-Le produit livré : une ligne par athlète et par semaine où au moins une séance est enregistrée.
+The delivered product: one row per athlete and per week with at least one recorded session.
 
-| Colonne | Type | Unité | Définition | Valeurs possibles | Source |
+| Column | Type | Unit | Definition | Possible values | Source |
 | --- | --- | --- | --- | --- | --- |
-| athlete | TEXT | — | Identifiant fictif de l'athlète | A01 à A06 | `seances.athlete` |
-| semaine | TEXT | jour (AAAA-MM-JJ) | Lundi de la semaine | huit lundis, du 2026-09-28 au 2026-11-16 | calculée depuis `seances.date` |
-| nb_seances | INTEGER | séances | Nombre de séances retenues dans la semaine | 1 à 7 (3 dans les données générées, moins si une séance a été exclue) | `COUNT(*)` sur `seances` |
-| minutes | REAL | minutes | Durée totale courue dans la semaine | 0 et plus | somme de `seances.duree_min` |
-| charge | REAL | unité arbitraire (UA) | Somme sur la semaine de l'effort perçu × durée en minutes | 0 et plus | somme de `seances.rpe × seances.duree_min` |
+| athlete_id | TEXT | — | Fictional identifier of the athlete | A01 to A06 | `sessions.athlete_id` |
+| week | TEXT | day (YYYY-MM-DD) | Monday of the week | eight Mondays, from 2026-09-28 to 2026-11-16 | computed from `sessions.date` |
+| n_sessions | INTEGER | sessions | Number of sessions kept in the week | 1 to 7 (3 in the generated data, fewer if a session was excluded) | `COUNT(*)` over `sessions` |
+| minutes | REAL | minutes | Total duration run in the week | 0 and above | sum of `sessions.duration_min` |
+| load | REAL | arbitrary unit (AU) | Sum over the week of perceived exertion × duration in minutes | 0 and above | sum of `sessions.rpe × sessions.duration_min` |
