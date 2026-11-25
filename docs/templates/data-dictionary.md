@@ -1,18 +1,18 @@
 ---
-title: Dictionnaire de données
+title: Data dictionary
 sidebar_position: 3
 ---
 
-# Modèle : dictionnaire de données
+# Template: data dictionary
 
-Un tableau par table ou par fichier livré, pour qu'un utilisateur comprenne chaque colonne sans vous demander. Vous pouvez copier ce modèle tel quel ou l'adapter : [fichier Markdown brut](https://raw.githubusercontent.com/simIDe/quality-approach-guide/main/i18n/fr/docusaurus-plugin-content-docs/current/templates/data-dictionary.md).
+One table per delivered table or file, so that a user understands each column without asking you. You can copy this template as is or adapt it: [raw Markdown file](https://raw.githubusercontent.com/simIDe/quality-approach-guide/main/docs/templates/data-dictionary.md).
 
-## Table : `nom_de_la_table`
+## Table: `table_name`
 
-Une phrase sur ce que représente une ligne de la table.
+One sentence on what a row of the table represents.
 
-| Colonne | Type | Unité | Définition | Valeurs possibles | Source |
+| Column | Type | Unit | Definition | Possible values | Source |
 | --- | --- | --- | --- | --- | --- |
 | | | | | | |
 
-Recopier le bloc ci-dessus pour chaque table.
+Copy the block above for each table.
