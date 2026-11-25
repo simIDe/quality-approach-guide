@@ -4,14 +4,14 @@ Un extrait, pour montrer la forme. Le journal d'un groupe est plus long et écri
 
 | Date | Décision ou événement | Pourquoi | Qui |
 | --- | --- | --- | --- |
-| 2026-11-09 | Sujet : la charge d'entraînement hebdomadaire pour l'entraîneur d'un club de course à pied | C'est l'exemple vu en cours ; un utilisateur et une décision faciles à nommer | enseignant |
-| 2026-11-09 | Données synthétiques générées par script, athlètes fictifs | Des vraies séances seraient des données personnelles, et même des données de santé | enseignant |
-| 2026-11-10 | Quatre défauts fixés à l'avance : durées en heures, semaine manquante, doublon, effort hors échelle | Un défaut par grande famille de problème, pour que chaque contrôle ait quelque chose à trouver | enseignant |
-| 2026-11-10 | SQLite et bibliothèque standard de Python, pytest pour les tests | Rien à installer à part uv ; le code doit se lire en vingt minutes | enseignant |
-| 2026-11-25 | Tests écrits avant le code, dont un qui exige la détection des quatre défauts | Le test fixe ce qu'on attend avant que le code existe ; impossible de « réussir » sans détecter | agent de code, relu par l'enseignant |
-| 2026-11-25 | Date de fin des données fixée au 22 novembre 2026 au lieu de la date du jour | Le même fichier et le même rapport à chaque lancement, donc des tests stables | agent de code, relu par l'enseignant |
-| 2026-11-25 | Semaine manquante signalée, pas remplie par une charge nulle | Une semaine sans enregistrement n'est pas forcément une semaine de repos ; inventer un zéro tromperait l'entraîneur | enseignant |
-| 2026-11-25 | Une durée sous 10 « minutes » est considérée comme saisie en heures | Une séance de moins de dix minutes est invraisemblable pour ce club ; la règle reste une hypothèse, est écrite dans la fiche produit comme limite | enseignant |
+| 2026-11-25 | Sujet : la charge d'entraînement hebdomadaire pour l'entraîneur d'un club de course à pied | C'est l'exemple vu en cours ; un utilisateur et une décision faciles à nommer | enseignant (spécification) |
+| 2026-11-25 | Données synthétiques générées par script, athlètes fictifs | Des vraies séances seraient des données personnelles, et même des données de santé | enseignant (spécification) |
+| 2026-11-25 | Quatre défauts fixés à l'avance : durées en heures, semaine manquante, doublon, effort hors échelle | Un défaut par grande famille de problème, pour que chaque contrôle ait quelque chose à trouver | enseignant (spécification) |
+| 2026-11-25 | SQLite et bibliothèque standard de Python, pytest pour les tests | Rien à installer à part uv ; le code doit se lire en vingt minutes | enseignant (spécification) |
+| 2026-11-25 | Tests écrits avant le code, dont un qui exige la détection des quatre défauts | Le test fixe ce qu'on attend avant que le code existe ; impossible de « réussir » sans détecter | agent de code |
+| 2026-11-25 | Date de fin des données fixée au 22 novembre 2026 au lieu de la date du jour | Le même fichier et le même rapport à chaque lancement, donc des tests stables | agent de code |
+| 2026-11-25 | Semaine manquante signalée, pas remplie par une charge nulle | Une semaine sans enregistrement n'est pas forcément une semaine de repos ; inventer un zéro tromperait l'entraîneur | agent de code |
+| 2026-11-25 | Une durée sous 10 « minutes » est considérée comme saisie en heures | Une séance de moins de dix minutes est invraisemblable pour ce club ; la règle reste une hypothèse, est écrite dans la fiche produit comme limite | agent de code |
 | 2026-11-25 | CI sur Linux, Windows et macOS | Vérifier que la commande unique marche sur les trois systèmes des étudiants | agent de code |
 
 ## Usage de l'IA

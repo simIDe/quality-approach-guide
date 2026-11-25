@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10.3.3 # pas d'étiquette « v10 » : version exacte
+      - uses: astral-sh/setup-uv@v10.4.0 # version exacte : il n'existe pas d'étiquette « v10 »
       - name: Installer l'environnement (versions figées par uv.lock)
         run: uv sync --locked
       - name: Lancer l'exemple en une commande
