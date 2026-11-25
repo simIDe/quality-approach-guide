@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Actuelle",
+    "description": "The label for version current"
+  },
+  "sidebar.guide.category.The mini-project": {
+    "message": "Le mini-projet",
+    "description": "The label for category 'The mini-project' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Quality": {
+    "message": "La qualité",
+    "description": "The label for category 'Quality' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Practical guides": {
+    "message": "Fiches pratiques",
+    "description": "The label for category 'Practical guides' in sidebar 'guide'"
+  },
+  "sidebar.guide.category.Templates": {
+    "message": "Modèles",
+    "description": "The label for category 'Templates' in sidebar 'guide'"
+  }
+}

@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Modèle : fiche produit
 
-Une page qui dit pour qui est le produit, à quelle décision il sert et ce qu'il garantit. Vous pouvez copier ce modèle tel quel ou l'adapter : [fichier Markdown brut](https://raw.githubusercontent.com/simIDe/quality-approach-guide/main/docs/modeles/fiche-produit.md).
+Une page qui dit pour qui est le produit, à quelle décision il sert et ce qu'il garantit. Vous pouvez copier ce modèle tel quel ou l'adapter : [fichier Markdown brut](https://raw.githubusercontent.com/simIDe/quality-approach-guide/main/i18n/fr/docusaurus-plugin-content-docs/current/templates/product-sheet.md).
 
 ## Le modèle
 

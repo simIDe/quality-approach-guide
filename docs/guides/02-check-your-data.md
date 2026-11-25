@@ -53,7 +53,7 @@ Dans les trois cas, écrivez-le : combien de lignes, quelle règle, pourquoi. Le
 
 ## Pour aller plus loin
 
-- Transformer chaque contrôle en test pytest, pour qu'il tourne tout seul (voir [la fiche 04](./04-automatiser-une-verification.md)).
+- Transformer chaque contrôle en test pytest, pour qu'il tourne tout seul (voir [la fiche 04](./04-automate-a-check.md)).
 - Décrire chaque colonne (type, unité, valeurs possibles) dans un dictionnaire de données : les contrôles d'exactitude en découlent.
 - Utiliser DuckDB pour contrôler directement un gros fichier CSV ou Parquet, sans le charger dans une base ([documentation DuckDB](https://duckdb.org/docs/)).
 

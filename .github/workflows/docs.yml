@@ -26,8 +26,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Vérifier que chaque page est dans la navigation
-        run: node scripts/verifier-navigation.mjs
+      - name: Check every page is in the navigation, in both languages
+        run: node scripts/check-navigation.mjs
       - name: Construire le site (échoue sur un lien ou une ancre cassés)
         run: npm run build
       - uses: actions/upload-pages-artifact@v5
