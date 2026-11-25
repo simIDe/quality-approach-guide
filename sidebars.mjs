@@ -12,6 +12,12 @@ const sidebars = {
       collapsed: false,
       items: ['brief', 'attendus-et-evaluation'],
     },
+    {
+      type: 'category',
+      label: 'La qualité',
+      collapsed: false,
+      items: ['liste-de-controle', 'glossaire'],
+    },
   ],
 };
 
