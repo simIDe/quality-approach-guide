@@ -1,4 +1,4 @@
-/* Thème sobre : couleurs par défaut d'Infima, texte un peu plus large. */
+/* Plain theme: a single blue accent on Infima defaults. */
 :root {
   --ifm-color-primary: #2e5c8a;
   --ifm-color-primary-dark: #29537c;
