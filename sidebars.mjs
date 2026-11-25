@@ -4,7 +4,15 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  guide: ['index'],
+  guide: [
+    'index',
+    {
+      type: 'category',
+      label: 'Le mini-projet',
+      collapsed: false,
+      items: ['idees-de-projets'],
+    },
+  ],
 };
 
 export default sidebars;
