@@ -13,7 +13,7 @@ Ce dépôt est un guide. Votre projet peut être organisé tout autrement.
 
 1. Lire [le brief](brief.md) : ce qui est attendu, pour quand, et les règles.
 2. Garder sous la main [la liste de contrôle](liste-de-controle.md) : les questions à se poser sur les données et sur le projet.
-3. Parcourir l'exemple : un *data product* minimal, relançable en une commande.
+3. Parcourir [l'exemple](exemple.md) : un *data product* minimal, relançable en une commande.
 
 ## Les fiches pratiques
 
