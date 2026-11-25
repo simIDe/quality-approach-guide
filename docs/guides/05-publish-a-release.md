@@ -1,49 +1,49 @@
 ---
-title: "05 · Publier une version"
+title: "05 · Publish a release"
 sidebar_position: 5
 ---
 
-*Comment dire « ceci est la version livrée » ?*
+*How do I say "this is the delivered version"?*
 
-## Le problème
+## The problem
 
-Le 18 janvier, vous livrez le projet, mais le groupe continue à corriger des détails dans les jours qui suivent. Le 20 janvier, l'entraîneur, l'enseignant et le groupe qui relance votre projet ne regardent plus la même chose.
+On 18 January you deliver the project, but the group keeps fixing details in the days that follow. On 20 January, the coach, the teacher and the group rerunning your project are no longer looking at the same thing.
 
-## Le minimum utile
+## The bare minimum
 
-Marquer la version livrée par un tag, puis en faire une release.
+Mark the delivered version with a tag, then turn it into a release.
 
-- Un *tag* est une étiquette posée sur un commit précis (un *commit* est un enregistrement daté de modifications). Il ne bouge plus, même si la branche avance.
-- Une *release* GitHub est une page attachée à un tag : un titre, des notes de version et une archive du code téléchargeable ([documentation GitHub sur les releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)).
+- A *tag* is a label placed on a specific commit (a *commit* is a dated record of changes). It no longer moves, even if the branch moves on.
+- A GitHub *release* is a page attached to a tag: a title, release notes and a downloadable archive of the code ([GitHub documentation on releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)).
 
 ```bash
 git switch main
-git pull                                         # la version fusionnée et relue
-git tag -a v1.0.0 -m "Version livrée le 18 janvier 2027"
+git pull                                         # the merged, reviewed version
+git tag -a v1.0.0 -m "Version delivered on 18 January 2027"
 git push origin v1.0.0
 gh release create v1.0.0 --title "v1.0.0" --notes-file NOTES.md
 ```
 
-La release peut aussi se créer depuis l'interface : *Releases*, puis *Draft a new release*.
+The release can also be created from the web interface: *Releases*, then *Draft a new release*.
 
-Les notes de version tiennent en trois lignes : ce que fait le produit, ce qui a changé depuis la version précédente, les limites connues.
+The release notes fit in three lines: what the product does, what changed since the previous version, the known limits.
 
 ```markdown
-Tableau hebdomadaire de charge d'entraînement, 12 athlètes, 8 dernières semaines.
-Nouveau : les séances saisies en heures sont converties en minutes.
-Limite connue : une semaine manquante pour un athlète, signalée dans le rapport.
+Weekly training load table, 12 athletes, last 8 weeks.
+New: sessions entered in hours are converted to minutes.
+Known limit: one missing week for one athlete, flagged in the report.
 ```
 
-Une convention courante pour le numéro : `v1.0.0` pour la première version livrée, `v1.0.1` pour une correction, `v1.1.0` pour un ajout. Rien n'oblige à la suivre ; l'important est qu'un numéro désigne toujours le même état du code.
+A common convention for the number: `v1.0.0` for the first delivered version, `v1.0.1` for a fix, `v1.1.0` for an addition. Nothing forces you to follow it; what matters is that a number always refers to the same state of the code.
 
-## Pour aller plus loin
+## Going further
 
-- Publier une documentation ou un rapport sur GitHub Pages, comme le fait ce dépôt : son site est construit avec Docusaurus par GitHub Actions et publié à chaque fusion ([workflows personnalisés pour GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)).
-- Joindre à la release le fichier produit (rapport, CSV nettoyé) avec `gh release upload v1.0.0 rapport.md`, pour que l'utilisateur n'ait rien à relancer.
-- Tenir un fichier `CHANGELOG.md` qui accumule les notes de chaque version.
+- Publish documentation or a report on GitHub Pages, as this repository does: its site is built with Docusaurus by GitHub Actions and published on every merge ([custom workflows for GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)).
+- Attach the produced file (report, cleaned CSV) to the release with `gh release upload v1.0.0 report.md`, so the user has nothing to rerun.
+- Keep a `CHANGELOG.md` file that accumulates the notes of each version.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- La page *Releases* du dépôt montre une version datée avec ses notes.
-- `git switch --detach v1.0.0` sur une autre machine, puis les commandes du README, redonnent exactement le produit livré.
-- La fiche produit et le journal de méthode citent le numéro de version livrée.
+- The repository's *Releases* page shows a dated version with its notes.
+- `git switch --detach v1.0.0` on another machine, followed by the README commands, gives back exactly the delivered product.
+- The product sheet and the method log cite the delivered version number.

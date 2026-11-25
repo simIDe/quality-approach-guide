@@ -1,42 +1,42 @@
 ---
-title: "06 · Travailler avec un agent"
+title: "06 · Work with an agent"
 sidebar_position: 6
 ---
 
-*Comment utiliser un agent de code sans perdre la main ?*
+*How do I use a coding agent without losing control?*
 
-## Le problème
+## The problem
 
-Vous demandez à un agent de code (un assistant d'IA qui lit, écrit et lance du code dans votre projet) de « nettoyer les données de séances ». Il modifie six fichiers, les tests passent, mais personne dans le groupe ne sait expliquer ce qu'il a supprimé, et le 20 janvier chacun devra pouvoir le faire.
+You ask a coding agent (an AI assistant that reads, writes and runs code in your project) to "clean the session data". It changes six files, the tests pass, but nobody in the group can explain what it deleted, and on 20 January everyone will need to be able to.
 
-## Le minimum utile
+## The bare minimum
 
-**1. Écrire la demande avant le code.** Quelques lignes : le but, les fichiers concernés, ce qui ne doit pas changer, comment on saura que c'est réussi. Si vous ne savez pas l'écrire, l'agent ne le devinera pas.
+**1. Write the request before the code.** A few lines: the goal, the files involved, what must not change, how you will know it worked. If you can't write it, the agent won't guess it.
 
 ```text
-But : convertir en minutes les durées saisies en heures dans seances.csv.
-Règle : une durée inférieure à 5 est considérée comme des heures.
-Ne pas toucher : le calcul de la charge, les autres colonnes.
-Réussi si : le nouveau test passe et les anciens aussi.
-Propose un plan avant de modifier quoi que ce soit.
+Goal: convert to minutes the durations entered in hours in sessions.csv.
+Rule: a duration below 5 is treated as hours.
+Do not touch: the load calculation, the other columns.
+Done when: the new test passes and the old ones do too.
+Propose a plan before changing anything.
 ```
 
-**2. Faire écrire les tests d'abord.** Demandez le test, lisez-le, vérifiez qu'il échoue, puis seulement demandez le code qui le fait passer. Refusez toute modification d'un test existant faite pour qu'il passe.
+**2. Have the tests written first.** Ask for the test, read it, check that it fails, and only then ask for the code that makes it pass. Refuse any change to an existing test made just to make it pass.
 
-**3. Relire le diff.** Le *diff* est la liste des lignes ajoutées et supprimées. Lisez-le en entier avant chaque commit (enregistrement de modifications), avec `git diff` ou dans la pull request, et demandez à l'agent d'expliquer chaque ligne que vous ne comprenez pas.
+**3. Review the diff.** The *diff* is the list of lines added and removed. Read it in full before each commit (record of changes), with `git diff` or in the pull request, and ask the agent to explain every line you don't understand.
 
-**4. Ne jamais lui envoyer** de secret (mot de passe, clé d'API, fichier `.env`), ni de données personnelles : noms d'athlètes, données de santé, fichiers bruts de montres connectées. Travaillez sur un échantillon synthétique ou pseudonymisé (voir [la fiche 07](./07-personal-data.md)).
+**4. Never send it** secrets (password, API key, `.env` file) or personal data: athletes' names, health data, raw files from smartwatches. Work on a synthetic or pseudonymised sample (see [guide 07](./07-personal-data.md)).
 
-**5. Tenir le journal.** Dans le journal de méthode, à chaque usage notable : ce qui a été demandé, ce qui a été gardé, ce qui a été rejeté ou corrigé, et pourquoi. C'est une preuve attendue, pas une formalité.
+**5. Keep the log.** In the method log, for each notable use: what was asked, what was kept, what was rejected or corrected, and why. It is expected evidence, not a formality.
 
-## Pour aller plus loin
+## Going further
 
-- Écrire un fichier `AGENTS.md` à la racine du projet : commandes pour installer et tester, règles du groupe. De nombreux agents lisent ce fichier au démarrage ; ce dépôt en a un ([AGENTS.md](https://github.com/simIDe/quality-approach-guide/blob/main/AGENTS.md)).
-- Faire travailler l'agent sur une branche à part, fusionnée par pull request après relecture humaine (voir [la fiche 01](./01-collaborate-on-github.md)).
-- Utiliser un modèle local quand les données ne doivent pas quitter la machine, au prix d'une qualité souvent moindre.
+- Write an `AGENTS.md` file at the root of the project: commands to install and test, the group's rules. Many agents read this file when they start; this repository has one ([AGENTS.md](https://github.com/simIDe/quality-approach-guide/blob/main/AGENTS.md)).
+- Have the agent work on a separate branch, merged through a pull request after human review (see [guide 01](./01-collaborate-on-github.md)).
+- Use a local model when the data must not leave the machine, often at the cost of lower quality.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- Chaque membre peut expliquer n'importe quel fichier du projet, y compris ceux écrits par l'agent.
-- Le journal de méthode contient au moins un exemple de proposition de l'agent rejetée ou corrigée.
-- Aucun secret ni donnée personnelle n'apparaît dans les conversations avec l'agent ni dans l'historique git.
+- Every member can explain any file in the project, including those written by the agent.
+- The method log contains at least one example of an agent proposal that was rejected or corrected.
+- No secret or personal data appears in the conversations with the agent or in the git history.

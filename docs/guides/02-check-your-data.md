@@ -1,64 +1,64 @@
 ---
-title: "02 · Contrôler des données"
+title: "02 · Check your data"
 sidebar_position: 2
 ---
 
-*Comment savoir si mes données sont bonnes ?*
+*How do I know if my data is good?*
 
-## Le problème
+## The problem
 
-Votre tableau de charge d'entraînement annonce qu'un athlète a couru 90 heures cette semaine : une séance a été saisie en heures au lieu de minutes. L'entraîneur ne vous fera plus confiance si c'est lui qui le découvre.
+Your training load table says an athlete ran for 90 hours this week: one session was entered in hours instead of minutes. The coach will stop trusting you if he is the one who spots it.
 
-## Le minimum utile
+## The bare minimum
 
-« Bonnes » veut dire bonnes *pour l'usage promis*. Choisissez, pour chacune des cinq dimensions de la qualité, au moins un contrôle qui a du sens pour votre utilisateur.
+"Good" means good *for the promised use*. For each of the five quality dimensions, pick at least one check that makes sense for your user.
 
-| Dimension | La question | Exemple de contrôle |
+| Dimension | The question | Example check |
 | --- | --- | --- |
-| Exactitude | Les valeurs sont-elles plausibles ? | Effort perçu entre 0 et 10, durée entre 5 et 300 minutes |
-| Complétude | Manque-t-il des lignes ou des valeurs ? | Chaque athlète a au moins une séance chaque semaine |
-| Fraîcheur | Les données sont-elles assez récentes ? | La séance la plus récente date de moins de 7 jours |
-| Cohérence | Les données se contredisent-elles ? | Pas de séance datée dans le futur |
-| Unicité | Une même chose est-elle comptée deux fois ? | Pas deux séances identiques (athlète, date, durée) |
+| Accuracy | Are the values plausible? | Perceived effort between 0 and 10, duration between 5 and 300 minutes |
+| Completeness | Are rows or values missing? | Each athlete has at least one session every week |
+| Timeliness | Is the data recent enough? | The most recent session is less than 7 days old |
+| Consistency | Does the data contradict itself? | No session dated in the future |
+| Uniqueness | Is the same thing counted twice? | No two identical sessions (athlete, date, duration) |
 
-En SQL (ici SQLite), chaque contrôle est une requête qui renvoie les lignes en défaut ; zéro ligne veut dire contrôle réussi.
+In SQL (here SQLite), each check is a query that returns the faulty rows; zero rows means the check passed.
 
 ```sql
--- Exactitude : effort hors de l'échelle ou durée improbable
-SELECT * FROM seances WHERE effort NOT BETWEEN 0 AND 10 OR duree_min NOT BETWEEN 5 AND 300;
--- Unicité : séances en double
-SELECT athlete, date, duree_min, COUNT(*) AS n
-FROM seances GROUP BY athlete, date, duree_min HAVING COUNT(*) > 1;
--- Fraîcheur : une ligne si la séance la plus récente a plus de 7 jours
-SELECT MAX(date) AS derniere FROM seances HAVING MAX(date) < date('now', '-7 days');
+-- Accuracy: effort off the scale or implausible duration
+SELECT * FROM sessions WHERE effort NOT BETWEEN 0 AND 10 OR duration_min NOT BETWEEN 5 AND 300;
+-- Uniqueness: duplicate sessions
+SELECT athlete, date, duration_min, COUNT(*) AS n
+FROM sessions GROUP BY athlete, date, duration_min HAVING COUNT(*) > 1;
+-- Timeliness: one row if the most recent session is more than 7 days old
+SELECT MAX(date) AS latest FROM sessions HAVING MAX(date) < date('now', '-7 days');
 ```
 
-Les mêmes contrôles en Python, avec le module `sqlite3` de la bibliothèque standard :
+The same checks in Python, with the standard library's `sqlite3` module:
 
 ```python
 import sqlite3
 
-con = sqlite3.connect("donnees/seances.db")
-hors_echelle = con.execute("SELECT * FROM seances WHERE effort NOT BETWEEN 0 AND 10").fetchall()
-assert not hors_echelle, f"{len(hors_echelle)} séance(s) avec un effort hors échelle"
+con = sqlite3.connect("data/sessions.db")
+off_scale = con.execute("SELECT * FROM sessions WHERE effort NOT BETWEEN 0 AND 10").fetchall()
+assert not off_scale, f"{len(off_scale)} session(s) with effort off the scale"
 ```
 
-**Quoi faire d'un défaut trouvé.** Trois réponses possibles, à choisir au cas par cas :
+**What to do with a defect you find.** Three possible answers, to choose case by case:
 
-- **corriger** quand la bonne valeur est certaine (une durée de 1,5 manifestement en heures devient 90 minutes) ;
-- **exclure** quand elle ne l'est pas (un effort de 14 sur 10) ;
-- **signaler** quand on garde la ligne mais que l'utilisateur doit le savoir (une semaine manquante).
+- **correct** when the right value is certain (a duration of 1.5, obviously in hours, becomes 90 minutes);
+- **exclude** when it is not (an effort of 14 out of 10);
+- **flag** when you keep the row but the user needs to know (a missing week).
 
-Dans les trois cas, écrivez-le : combien de lignes, quelle règle, pourquoi. Le rapport livré et le journal de méthode sont les bons endroits. L'exemple du dépôt fait exactement cela : [exemples/charge-entrainement](https://github.com/simIDe/quality-approach-guide/tree/main/exemples/charge-entrainement).
+In all three cases, write it down: how many rows, which rule, why. The delivered report and the method log are the right places. The repository's example does exactly that: [examples/training-load](https://github.com/simIDe/quality-approach-guide/tree/main/examples/training-load).
 
-## Pour aller plus loin
+## Going further
 
-- Transformer chaque contrôle en test pytest, pour qu'il tourne tout seul (voir [la fiche 04](./04-automate-a-check.md)).
-- Décrire chaque colonne (type, unité, valeurs possibles) dans un dictionnaire de données : les contrôles d'exactitude en découlent.
-- Utiliser DuckDB pour contrôler directement un gros fichier CSV ou Parquet, sans le charger dans une base ([documentation DuckDB](https://duckdb.org/docs/)).
+- Turn each check into a pytest test, so it runs on its own (see [guide 04](./04-automate-a-check.md)).
+- Describe each column (type, unit, possible values) in a data dictionary: the accuracy checks follow from it.
+- Use DuckDB to check a large CSV or Parquet file directly, without loading it into a database ([DuckDB documentation](https://duckdb.org/docs/)).
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- Chaque dimension a au moins un contrôle écrit, que l'on peut relancer.
-- Chaque défaut trouvé a une décision (corrigé, exclu, signalé) notée quelque part.
-- Le produit livré annonce ses limites connues.
+- Each dimension has at least one written check that can be rerun.
+- Each defect found has a decision (corrected, excluded, flagged) written down somewhere.
+- The delivered product states its known limits.

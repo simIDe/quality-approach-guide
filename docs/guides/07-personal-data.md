@@ -1,43 +1,43 @@
 ---
-title: "07 · Données personnelles"
+title: "07 · Personal data"
 sidebar_position: 7
 ---
 
-*Ai-je le droit d'utiliser ces données ?*
+*Am I allowed to use this data?*
 
-Cette fiche ne donne pas de conseil juridique : elle aide à se poser les questions et renvoie à la CNIL, l'autorité française de protection des données.
+This guide is not legal advice: it helps you ask the right questions and points to the CNIL (Commission nationale de l'informatique et des libertés), the French data protection authority. Its pages linked below are in French.
 
-## Le problème
+## The problem
 
-Votre club vous propose les exports de montres connectées de ses coureurs : fréquence cardiaque, positions GPS, blessures notées par le kiné. Le projet serait plus réaliste, mais ces données décrivent des personnes réelles, et leur santé.
+Your club offers you the smartwatch exports of its runners: heart rate, GPS positions, injuries recorded by the physiotherapist. The project would be more realistic, but this data describes real people, and their health.
 
-## Le minimum utile
+## The bare minimum
 
-**Reconnaître une donnée personnelle.** C'est toute information qui se rapporte à une personne identifiée ou identifiable, directement (nom, photo) ou indirectement (numéro de licence, trace GPS qui part chaque matin du même domicile, combinaison âge + club + discipline) ([définition CNIL](https://www.cnil.fr/fr/definition/donnee-personnelle)).
+**Recognising personal data.** It is any information relating to an identified or identifiable person, directly (name, photo) or indirectly (licence number, a GPS track that leaves the same home every morning, the combination of age + club + sport) ([CNIL definition](https://www.cnil.fr/fr/definition/donnee-personnelle)).
 
-**Reconnaître une donnée de santé.** Fréquence cardiaque, blessures, poids, sommeil ou cycle menstruel peuvent en être, selon l'usage qui en est fait. Ce sont des données sensibles, protégées plus strictement ([qu'est-ce qu'une donnée de santé, CNIL](https://www.cnil.fr/fr/quest-ce-ce-quune-donnee-de-sante)).
+**Recognising health data.** Heart rate, injuries, weight, sleep or menstrual cycle can be health data, depending on how they are used. They are sensitive data, protected more strictly ([what is health data, CNIL](https://www.cnil.fr/fr/quest-ce-ce-quune-donnee-de-sante)).
 
-**Six questions à se poser avant de les utiliser**, réponses à noter dans la fiche produit :
+**Six questions to ask before using them**, with the answers written in the product sheet:
 
-1. **Finalité** : à quoi serviront-elles, précisément ?
-2. **Base légale** : sur quoi repose le droit de les traiter (par exemple le consentement des personnes) ?
-3. **Minimisation** : de quelles colonnes a-t-on vraiment besoin pour la décision visée ?
-4. **Accès** : qui peut les voir ? Le dépôt est-il public ? Un modèle d'IA les reçoit-il ?
-5. **Durée** : combien de temps sont-elles gardées, qui les supprime ensuite ?
-6. **Hébergement** : où sont-elles stockées, dans quel pays ?
+1. **Purpose**: what exactly will they be used for?
+2. **Legal basis**: what gives you the right to process them (for example the people's consent)?
+3. **Minimisation**: which columns do you really need for the intended decision?
+4. **Access**: who can see them? Is the repository public? Does an AI model receive them?
+5. **Retention**: how long are they kept, and who deletes them afterwards?
+6. **Hosting**: where are they stored, in which country?
 
-**Pseudonymiser n'est pas anonymiser.** Remplacer « Léa Martin » par « A07 » est une pseudonymisation : avec la table de correspondance, ou en croisant date, club et performance, on retrouve la personne ; les données restent personnelles. L'anonymisation rend la réidentification impossible en pratique, et elle est difficile à garantir ([l'anonymisation, CNIL](https://www.cnil.fr/fr/technologies/lanonymisation-de-donnees-personnelles) ; [anonymisation et pseudonymisation en recherche, CNIL](https://www.cnil.fr/fr/recherche-scientifique-hors-sante-enjeux-et-avantages-de-lanonymisation-et-de-la-pseudonymisation)).
+**Pseudonymising is not anonymising.** Replacing "Léa Martin" with "A07" is pseudonymisation: with the lookup table, or by cross-referencing date, club and performance, the person can be found again; the data remains personal. Anonymisation makes re-identification impossible in practice, and it is hard to guarantee ([anonymisation, CNIL](https://www.cnil.fr/fr/technologies/lanonymisation-de-donnees-personnelles); [anonymisation and pseudonymisation in research, CNIL](https://www.cnil.fr/fr/recherche-scientifique-hors-sante-enjeux-et-avantages-de-lanonymisation-et-de-la-pseudonymisation)).
 
-Souvent, le plus simple est de s'en passer : des données synthétiques ou ouvertes suffisent pour démontrer une méthode.
+Often the simplest is to do without: synthetic or open data are enough to demonstrate a method.
 
-## Pour aller plus loin
+## Going further
 
-- Le [guide RGPD du développeur](https://www.cnil.fr/fr/technologies/guide-rgpd-du-developpeur) (CNIL) : sécurité, minimisation, gestion du code source.
-- Une vue d'ensemble : [RGPD, de quoi parle-t-on ?](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on) (CNIL).
-- En cas de doute, le délégué à la protection des données (DPO) de la structure qui fournit les données.
+- The [GDPR developer guide](https://www.cnil.fr/fr/technologies/guide-rgpd-du-developpeur) (CNIL): security, minimisation, source code management.
+- An overview: [GDPR, what is it about?](https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on) (CNIL).
+- When in doubt, the data protection officer (DPO) of the organisation providing the data.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- La fiche produit dit si le projet utilise des données personnelles et, si oui, répond aux six questions.
-- Aucune donnée personnelle n'est dans le dépôt ni dans son historique, ni envoyée à un modèle d'IA.
-- Le groupe sait expliquer pourquoi ses données sont pseudonymisées, anonymisées ou synthétiques.
+- The product sheet says whether the project uses personal data and, if so, answers the six questions.
+- No personal data is in the repository or its history, or sent to an AI model.
+- The group can explain why its data is pseudonymised, anonymised or synthetic.

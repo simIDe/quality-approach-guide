@@ -1,19 +1,19 @@
 ---
-title: "04 · Automatiser une vérification"
+title: "04 · Automate a check"
 sidebar_position: 4
 ---
 
-*Comment faire tourner mes contrôles tout seuls ?*
+*How do I get my checks to run on their own?*
 
-## Le problème
+## The problem
 
-Vos tests et vos contrôles de données existent, mais chacun oublie de les lancer avant de pousser son travail. Hugo fusionne une modification qui casse le calcul de la charge, et l'erreur n'est découverte que la veille de la livraison.
+Your tests and data checks exist, but everyone forgets to run them before pushing their work. Hugo merges a change that breaks the load calculation, and the error is only discovered the day before delivery.
 
-## Le minimum utile
+## The bare minimum
 
-GitHub Actions lance des commandes sur une machine de GitHub à chaque modification du dépôt, gratuitement pour un dépôt public. Un *workflow* est un fichier YAML placé dans `.github/workflows/` qui dit quand et quoi lancer.
+GitHub Actions runs commands on a GitHub machine on every change to the repository, free of charge for a public repository. A *workflow* is a YAML file placed in `.github/workflows/` that says when and what to run.
 
-Ce workflow lance pytest à chaque *push* (envoi de commits vers GitHub) et à chaque pull request (demande de fusion d'une branche) :
+This workflow runs pytest on every *push* (sending commits to GitHub) and on every pull request (request to merge a branch):
 
 ```yaml
 # .github/workflows/tests.yml
@@ -27,33 +27,33 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7        # récupère le code du dépôt
-      - uses: astral-sh/setup-uv@v10.4.0 # installe uv (version exacte)
-      - run: uv sync                     # installe les dépendances figées (uv.lock)
-      - run: uv run pytest -q            # lance les tests ; un échec fait échouer le workflow
+      - uses: actions/checkout@v7        # fetches the repository's code
+      - uses: astral-sh/setup-uv@v10.4.0 # installs uv (exact version)
+      - run: uv sync                     # installs the pinned dependencies (uv.lock)
+      - run: uv run pytest -q            # runs the tests; a failure fails the workflow
 ```
 
-Il suppose un projet géré avec uv et des tests pytest (voir [la fiche 03](./03-make-it-rerunnable.md)). Vos contrôles de données peuvent tourner de la même façon, écrits comme des tests ou lancés par une ligne `run:` de plus (`uv run python controles.py`), pourvu que le script s'arrête en erreur quand un contrôle échoue.
+It assumes a project managed with uv and pytest tests (see [guide 03](./03-make-it-rerunnable.md)). Your data checks can run the same way, written as tests or launched by one more `run:` line (`uv run python checks.py`), as long as the script exits with an error when a check fails.
 
-**Lire un échec.** Une croix rouge apparaît à côté du commit et dans la pull request.
+**Reading a failure.** A red cross appears next to the commit and in the pull request.
 
-1. Cliquer sur la croix, puis sur *Details* : la liste des étapes s'affiche, celle qui a échoué est marquée.
-2. Ouvrir cette étape et descendre jusqu'aux premières lignes en erreur : pytest y donne le nom du test et la valeur obtenue face à la valeur attendue.
-3. Reproduire en local avec la même commande (`uv run pytest -q`), corriger, pousser : le workflow repart tout seul.
+1. Click the cross, then *Details*: the list of steps is shown, and the one that failed is marked.
+2. Open that step and scroll down to the first lines in error: pytest gives the name of the test and the value obtained against the value expected.
+3. Reproduce locally with the same command (`uv run pytest -q`), fix, push: the workflow starts again on its own.
 
-**Deux exemples réels dans ce dépôt :**
+**Two real examples in this repository:**
 
-- [exemple.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/exemple.yml) installe l'environnement de l'exemple, génère les données, lance le pipeline puis les tests ;
-- [docs.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/docs.yml) construit ce site à chaque pull request et le publie à chaque fusion.
+- [example.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/example.yml) installs the example's environment, generates the data, runs the pipeline and then the tests;
+- [docs.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/docs.yml) builds this site on every pull request and publishes it on every merge.
 
-## Pour aller plus loin
+## Going further
 
-- Ajouter un linter comme Ruff dans une étape de plus, pour vérifier le style du code.
-- Lancer les contrôles de données chaque nuit avec un déclencheur `schedule`, utile si la source change toute seule ([démarrage rapide GitHub Actions](https://docs.github.com/en/actions/get-started/quickstart)).
-- Exiger que le workflow soit vert avant toute fusion, dans les réglages de protection de la branche principale.
+- Add a linter such as Ruff in one more step, to check the code style.
+- Run the data checks every night with a `schedule` trigger, useful if the source changes on its own ([GitHub Actions quickstart](https://docs.github.com/en/actions/get-started/quickstart)).
+- Require the workflow to be green before any merge, in the main branch's protection settings.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- L'onglet *Actions* du dépôt montre une exécution pour chaque push et chaque pull request.
-- Un test volontairement cassé sur une branche fait apparaître une croix rouge dans la pull request.
-- Chaque membre du groupe sait retrouver, dans le journal d'exécution, le test qui a échoué.
+- The repository's *Actions* tab shows a run for every push and every pull request.
+- A deliberately broken test on a branch makes a red cross appear in the pull request.
+- Every group member knows how to find the failed test in the run log.
