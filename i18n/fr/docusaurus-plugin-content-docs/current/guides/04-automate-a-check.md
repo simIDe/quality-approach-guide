@@ -33,7 +33,7 @@ jobs:
       - run: uv run pytest -q            # lance les tests ; un échec fait échouer le workflow
 ```
 
-Il suppose un projet géré avec uv et des tests pytest (voir [la fiche 03](./03-make-it-rerunnable.md)). Vos contrôles de données peuvent tourner de la même façon, écrits comme des tests ou lancés par une ligne `run:` de plus (`uv run python controles.py`), pourvu que le script s'arrête en erreur quand un contrôle échoue.
+Il suppose un projet géré avec uv et des tests pytest (voir [la fiche 03](./03-make-it-rerunnable.md)). Vos contrôles de données peuvent tourner de la même façon, écrits comme des tests ou lancés par une ligne `run:` de plus (`uv run python checks.py`), pourvu que le script s'arrête en erreur quand un contrôle échoue.
 
 **Lire un échec.** Une croix rouge apparaît à côté du commit et dans la pull request.
 
@@ -43,7 +43,7 @@ Il suppose un projet géré avec uv et des tests pytest (voir [la fiche 03](./03
 
 **Deux exemples réels dans ce dépôt :**
 
-- [exemple.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/exemple.yml) installe l'environnement de l'exemple, génère les données, lance le pipeline puis les tests ;
+- [example.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/example.yml) installe l'environnement de l'exemple, génère les données, lance le pipeline puis les tests ;
 - [docs.yml](https://github.com/simIDe/quality-approach-guide/blob/main/.github/workflows/docs.yml) construit ce site à chaque pull request et le publie à chaque fusion.
 
 ## Pour aller plus loin

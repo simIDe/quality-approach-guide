@@ -49,7 +49,7 @@ assert not hors_echelle, f"{len(hors_echelle)} séance(s) avec un effort hors é
 - **exclure** quand elle ne l'est pas (un effort de 14 sur 10) ;
 - **signaler** quand on garde la ligne mais que l'utilisateur doit le savoir (une semaine manquante).
 
-Dans les trois cas, écrivez-le : combien de lignes, quelle règle, pourquoi. Le rapport livré et le journal de méthode sont les bons endroits. L'exemple du dépôt fait exactement cela : [exemples/charge-entrainement](https://github.com/simIDe/quality-approach-guide/tree/main/exemples/charge-entrainement).
+Dans les trois cas, écrivez-le : combien de lignes, quelle règle, pourquoi. Le rapport livré et le journal de méthode sont les bons endroits. L'exemple du dépôt fait exactement cela : [examples/training-load](https://github.com/simIDe/quality-approach-guide/tree/main/examples/training-load).
 
 ## Pour aller plus loin
 
