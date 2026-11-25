@@ -1,30 +1,30 @@
 ---
-title: Accueil
+title: Home
 slug: /
 ---
 
-# Quality Approach : guide du mini-projet
+# Quality Approach: mini-project guide
 
-Ce site accompagne le mini-projet du cours Quality Approach (Master 2 STAPS, UFR STAPS Montpellier). Il donne de quoi s'orienter seul pendant les sept semaines du projet : le brief, une liste de contrôle qualité, des fiches pratiques courtes, des modèles de documents et un exemple qui fonctionne.
+This site supports the mini-project of the Quality Approach course (Master 2 STAPS, UFR STAPS Montpellier, the sports science faculty of the University of Montpellier). It gives you what you need to find your way on your own during the seven weeks of the project: the brief, a quality checklist, short practical guides, document templates and a working example.
 
-Ce dépôt est un guide. Votre projet peut être organisé tout autrement.
+This repository is a guide. Your project can be organised in a completely different way.
 
-## Par où commencer
+## Where to start
 
-1. Lire [le brief](./brief.md) : ce qui est attendu, pour quand, et les règles.
-2. Garder sous la main [la liste de contrôle](./quality-checklist.md) : les questions à se poser sur les données et sur le projet.
-3. Parcourir [l'exemple](./example.md) : un *data product* minimal, relançable en une commande.
+1. Read [the brief](./brief.md): what is expected, by when, and the rules.
+2. Keep [the checklist](./quality-checklist.md) at hand: the questions to ask about your data and your project.
+3. Browse [the example](./example.md): a minimal *data product* that can be rerun with one command.
 
-## Les fiches pratiques
+## The practical guides
 
-Chaque fiche répond à une question et se lit en cinq minutes.
+Each guide answers one question and takes five minutes to read.
 
-| Fiche | Question à laquelle elle répond |
+| Guide | The question it answers |
 | --- | --- |
-| [01 Collaborer sur GitHub](./guides/01-collaborate-on-github.md) | Comment travailler à trois sur le même code sans se marcher dessus ? |
-| [02 Contrôler des données](./guides/02-check-your-data.md) | Comment savoir si mes données sont bonnes ? |
-| [03 Rendre un projet relançable](./guides/03-make-it-rerunnable.md) | Quelqu'un d'autre peut-il relancer mon projet ? |
-| [04 Automatiser une vérification](./guides/04-automate-a-check.md) | Comment faire tourner mes contrôles tout seuls ? |
-| [05 Publier une version](./guides/05-publish-a-release.md) | Comment dire « ceci est la version livrée » ? |
-| [06 Travailler avec un agent](./guides/06-work-with-an-agent.md) | Comment utiliser un agent de code sans perdre la main ? |
-| [07 Données personnelles](./guides/07-personal-data.md) | Ai-je le droit d'utiliser ces données ? |
+| [01 Collaborate on GitHub](./guides/01-collaborate-on-github.md) | How can three people work on the same code without stepping on each other's toes? |
+| [02 Check your data](./guides/02-check-your-data.md) | How do I know if my data is good? |
+| [03 Make it rerunnable](./guides/03-make-it-rerunnable.md) | Can someone else rerun my project? |
+| [04 Automate a check](./guides/04-automate-a-check.md) | How do I get my checks to run on their own? |
+| [05 Publish a release](./guides/05-publish-a-release.md) | How do I say "this is the delivered version"? |
+| [06 Work with an agent](./guides/06-work-with-an-agent.md) | How do I use a coding agent without losing control? |
+| [07 Personal data](./guides/07-personal-data.md) | Am I allowed to use this data? |

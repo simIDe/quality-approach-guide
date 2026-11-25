@@ -1,61 +1,61 @@
 ---
-title: "03 · Rendre un projet relançable"
+title: "03 · Make it rerunnable"
 sidebar_position: 3
 ---
 
-*Quelqu'un d'autre peut-il relancer mon projet ?*
+*Can someone else rerun my project?*
 
-## Le problème
+## The problem
 
-Le 20 janvier, un autre groupe aura dix minutes pour relancer votre projet avec votre seul README. Si le script cherche `C:\Users\lea\Bureau\seances.csv`, demande une bibliothèque installée « à la main » ou donne des chiffres différents à chaque exécution, c'est perdu.
+On 20 January, another group will have ten minutes to rerun your project using only your README. If the script looks for `C:\Users\lea\Desktop\sessions.csv`, needs a library installed "by hand" or gives different numbers on every run, it's lost.
 
-## Le minimum utile
+## The bare minimum
 
-Cinq points, du plus important au moins important.
+Five points, from most to least important.
 
-**1. Des dépendances figées.** Une façon simple est [uv](https://docs.astral.sh/uv/), un gestionnaire de projets Python : il note les dépendances dans `pyproject.toml` et leurs versions exactes dans `uv.lock`. Les deux fichiers sont versionnés avec le code.
+**1. Pinned dependencies.** One simple way is [uv](https://docs.astral.sh/uv/), a Python project manager: it records the dependencies in `pyproject.toml` and their exact versions in `uv.lock`. Both files are versioned with the code.
 
 ```bash
-uv init                 # crée pyproject.toml (une fois, au début du projet)
-uv add pandas pytest    # ajoute des dépendances et met à jour uv.lock
-uv sync                 # sur une autre machine : installe exactement les mêmes versions
+uv init                 # creates pyproject.toml (once, at the start of the project)
+uv add pandas pytest    # adds dependencies and updates uv.lock
+uv sync                 # on another machine: installs exactly the same versions
 ```
 
-**2. Une seule commande pour tout lancer.** Un script d'entrée qui enchaîne les étapes (données, transformation, sortie) :
+**2. A single command to run everything.** An entry script that chains the steps (data, transformation, output):
 
 ```bash
 uv run python pipeline.py
 ```
 
-`uv run` lance la commande dans l'environnement du projet, sans avoir à l'activer.
+`uv run` runs the command in the project's environment, without having to activate it.
 
-**3. Des chemins relatifs au projet**, jamais à votre machine :
+**3. Paths relative to the project**, never to your machine:
 
 ```python
 from pathlib import Path
 
-RACINE = Path(__file__).resolve().parent
-SEANCES = RACINE / "donnees" / "seances.csv"   # fonctionne sous Windows, macOS et Linux
+ROOT = Path(__file__).resolve().parent
+SESSIONS = ROOT / "data" / "sessions.csv"   # works on Windows, macOS and Linux
 ```
 
-**4. Une graine aléatoire fixe** dès qu'il y a du hasard (données simulées, échantillonnage, modèle) :
+**4. A fixed random seed** as soon as there is randomness (simulated data, sampling, model):
 
 ```python
 import random
 
-random.seed(42)   # numpy : rng = numpy.random.default_rng(42)
+random.seed(42)   # numpy: rng = numpy.random.default_rng(42)
 ```
 
-**5. Un README d'installation** qui tient en quelques lignes : prérequis (version de Python, uv), commandes à taper dans l'ordre, ce qu'on doit obtenir à la fin.
+**5. An installation README** that fits in a few lines: prerequisites (Python version, uv), commands to type in order, what you should get at the end.
 
-## Pour aller plus loin
+## Going further
 
-- Sans uv, l'équivalent avec pip et venv : `python -m venv .venv`, activer l'environnement, puis `pip install -r requirements.txt`, avec des versions figées dans le fichier (`pandas==2.2.3`, produit par `pip freeze > requirements.txt`).
-- Un fichier `Makefile` ou un script `lancer.sh` / `lancer.ps1` quand il y a plusieurs commandes à enchaîner.
-- Un conteneur Docker fige aussi le système, au prix d'un outil de plus à installer et à expliquer.
+- Without uv, the equivalent with pip and venv: `python -m venv .venv`, activate the environment, then `pip install -r requirements.txt`, with versions pinned in the file (`pandas==2.2.3`, produced by `pip freeze > requirements.txt`).
+- A `Makefile` or a `run.sh` / `run.ps1` script when there are several commands to chain.
+- A Docker container also pins the system, at the cost of one more tool to install and explain.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- Un membre du groupe clone le dépôt dans un dossier neuf et relance tout avec le seul README, sans rien demander aux autres.
-- Deux exécutions successives donnent exactement les mêmes résultats.
-- Aucun chemin absolu dans le code : une recherche de `C:\` ou `/home/` ne trouve rien.
+- A group member clones the repository into a fresh folder and reruns everything using only the README, without asking the others anything.
+- Two successive runs give exactly the same results.
+- No absolute path in the code: a search for `C:\` or `/home/` finds nothing.

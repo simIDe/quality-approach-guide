@@ -1,44 +1,44 @@
 ---
-title: "01 · Collaborer sur GitHub"
+title: "01 · Collaborate on GitHub"
 sidebar_position: 1
 ---
 
-*Comment travailler à trois sur le même code sans se marcher dessus ?*
+*How can three people work on the same code without stepping on each other's toes?*
 
-## Le problème
+## The problem
 
-Léa corrige le calcul de la charge d'entraînement pendant que Hugo renomme les colonnes du même fichier, et chacun pousse directement sur la branche principale. Le soir, le script ne tourne plus et personne ne sait quelle modification l'a cassé.
+Léa fixes the training load calculation while Hugo renames the columns in the same file, and each pushes straight to the main branch. By evening the script no longer runs and nobody knows which change broke it.
 
-## Le minimum utile
+## The bare minimum
 
-Quatre habitudes suffisent pour commencer.
+Four habits are enough to start.
 
-1. **Répartir le travail avec des issues.** Une *issue* est un ticket GitHub : une tâche, un défaut ou une question, avec un titre, une description et une personne assignée. Une issue par tâche de quelques heures, pas plus.
-2. **Travailler sur une branche courte.** Une *branche* est une ligne de travail parallèle à la branche principale (`main`). Elle ne vit que le temps d'une tâche : un à deux jours.
-3. **Proposer la modification par une pull request.** Une *pull request* (PR) demande à fusionner une branche dans `main` ; GitHub y affiche le *diff*, c'est-à-dire les lignes ajoutées et supprimées.
-4. **Faire relire par un autre membre.** Quelqu'un d'autre que l'auteur lit le diff, pose ses questions, puis approuve et fusionne.
+1. **Split the work with issues.** An *issue* is a GitHub ticket: a task, a defect or a question, with a title, a description and an assignee. One issue per task of a few hours, no more.
+2. **Work on a short-lived branch.** A *branch* is a line of work parallel to the main branch (`main`). It only lives for the length of one task: one or two days.
+3. **Propose the change through a pull request.** A *pull request* (PR) asks to merge a branch into `main`; GitHub shows the *diff* there, that is, the lines added and removed.
+4. **Have another member review it.** Someone other than the author reads the diff, asks questions, then approves and merges.
 
 ```bash
 git switch main
-git pull                               # partir de la dernière version
-git switch -c 12-calcul-charge         # une branche par issue (ici l'issue n° 12)
-# ... modifier, tester ...
-git add src/charge.py
-git commit -m "Calcule la charge en minutes et non en heures"
-git push -u origin 12-calcul-charge
-gh pr create --fill                    # ou le bouton « Compare & pull request » sur GitHub
+git pull                               # start from the latest version
+git switch -c 12-load-calculation      # one branch per issue (here issue #12)
+# ... edit, test ...
+git add src/load.py
+git commit -m "Compute load in minutes instead of hours"
+git push -u origin 12-load-calculation
+gh pr create --fill                    # or the "Compare & pull request" button on GitHub
 ```
 
-Un *commit* est un enregistrement daté d'un ensemble de modifications, avec un message. Un bon message dit ce que fait le changement, en une phrase. Écrire `Closes #12` dans la description de la PR ferme l'issue automatiquement à la fusion.
+A *commit* is a dated record of a set of changes, with a message. A good message says what the change does, in one sentence. Writing `Closes #12` in the PR description closes the issue automatically when it is merged.
 
-## Pour aller plus loin
+## Going further
 
-- Protéger `main` dans les réglages du dépôt pour interdire la fusion sans relecture ([documentation GitHub sur les pull requests](https://docs.github.com/en/pull-requests/reference/pull-requests)).
-- Suivre les issues dans un tableau GitHub Projects (à faire, en cours, fait) plutôt qu'en liste.
-- Travailler à deux sur le même écran (*pair programming*) pour les parties délicates, la relecture se fait alors en direct.
+- Protect `main` in the repository settings to prevent merging without review ([GitHub documentation on pull requests](https://docs.github.com/en/pull-requests/reference/pull-requests)).
+- Track issues on a GitHub Projects board (to do, in progress, done) rather than in a list.
+- Work in pairs on the same screen (*pair programming*) for the tricky parts; the review then happens live.
 
-## Comment savoir si c'est fait
+## How to know it's done
 
-- L'historique de `main` ne contient que des fusions de pull requests, et chaque PR a été relue par quelqu'un d'autre que son auteur.
-- Chaque membre du groupe a ouvert au moins une PR et en a relu au moins une.
-- En lisant la liste des issues fermées, un tiers comprend qui a fait quoi.
+- The history of `main` contains only pull request merges, and each PR was reviewed by someone other than its author.
+- Every member of the group has opened at least one PR and reviewed at least one.
+- Reading the list of closed issues, an outsider understands who did what.

@@ -1,27 +1,27 @@
 ---
-title: Glossaire
+title: Glossary
 sidebar_position: 2
 ---
 
-# Glossaire
+# Glossary
 
-Les termes du cours, une ligne chacun.
+The course terms, one line each.
 
-- **Data product** (produit de données) : des données mises à disposition d'un utilisateur précis, pour une décision précise, avec une promesse et un responsable.
-- **Promesse** : ce que le produit garantit à son utilisateur (contenu, fraîcheur, périmètre), et ce qu'il ne garantit pas.
-- **Responsable** (*owner*) : la personne ou l'équipe qui répond du produit, de sa qualité et de ses évolutions.
-- **Cycle de vie de la donnée** : les étapes que traverse une donnée, de sa collecte à sa suppression, en passant par sa transformation et son usage.
-- **Ingestion** : l'étape qui récupère les données d'une source et les charge dans l'environnement du projet.
-- **Transformation** : l'étape qui nettoie, combine ou agrège les données pour les rendre utiles à la décision.
-- **Mise à disposition** : l'étape qui livre le résultat à l'utilisateur, sous forme de table, de fichier, de rapport, de tableau de bord ou d'API.
-- **Contrat de données** : un accord écrit entre producteur et utilisateur sur la forme, le sens et la qualité attendue des données.
-- **Dictionnaire de données** : la description de chaque colonne d'une table : type, unité, définition, valeurs possibles, source.
-- **Traçabilité** : la capacité à retrouver d'où vient une donnée et quelles étapes l'ont modifiée.
-- **Test de données** : une vérification automatique qu'un jeu de données respecte une règle (pas de doublon, valeurs dans une plage, colonne non vide).
-- **CI/CD** (intégration continue, déploiement continu) : l'exécution automatique des vérifications à chaque modification, puis la publication automatique de ce qui les a passées.
-- **Environnement reproductible** : un environnement dont les outils et les versions sont décrits assez précisément pour être recréé à l'identique sur une autre machine.
-- **Pull request** : une demande d'intégrer les modifications d'une branche dans la branche principale, qui permet de les relire et de les vérifier avant.
-- **Revue** : la relecture d'une modification par une autre personne avant son intégration.
-- **Release** : une version livrée, identifiée et datée, accompagnée de notes qui disent ce qu'elle contient.
-- **Agent de code** : un outil d'IA qui lit, écrit et exécute du code dans un projet à partir de demandes en langage naturel.
-- **DataOps** : l'application aux projets de données des pratiques du développement logiciel : versionnement, tests, automatisation, livraisons fréquentes.
+- **Data product**: data made available to a specific user, for a specific decision, with a promise and an owner.
+- **Promise**: what the product guarantees to its user (content, timeliness, scope), and what it does not guarantee.
+- **Owner**: the person or team accountable for the product, its quality and its changes.
+- **Data lifecycle**: the stages a piece of data goes through, from collection to deletion, via transformation and use.
+- **Ingestion**: the stage that retrieves data from a source and loads it into the project's environment.
+- **Transformation**: the stage that cleans, combines or aggregates the data to make it useful for the decision.
+- **Serving**: the stage that delivers the result to the user, as a table, file, report, dashboard or API.
+- **Data contract**: a written agreement between producer and user on the shape, meaning and expected quality of the data.
+- **Data dictionary**: the description of each column of a table: type, unit, definition, possible values, source.
+- **Traceability**: the ability to find where a piece of data comes from and which steps changed it.
+- **Data test**: an automatic check that a dataset follows a rule (no duplicates, values within a range, non-empty column).
+- **CI/CD** (continuous integration, continuous deployment): automatically running the checks on every change, then automatically publishing what passed them.
+- **Reproducible environment**: an environment whose tools and versions are described precisely enough to be recreated identically on another machine.
+- **Pull request**: a request to merge the changes of a branch into the main branch, which lets others review and check them first.
+- **Review**: another person reading a change before it is merged.
+- **Release**: a delivered version, identified and dated, with notes saying what it contains.
+- **Coding agent**: an AI tool that reads, writes and runs code in a project from requests in natural language.
+- **DataOps**: applying software development practices to data projects: versioning, tests, automation, frequent deliveries.
