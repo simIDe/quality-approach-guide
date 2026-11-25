@@ -17,8 +17,7 @@ def connexion():
 
 
 def charger_lignes(lignes, connexion, tmp_path):
-    chemin = ecrire_csv(lignes, tmp_path / "seances.csv")
-    charger(chemin, connexion)
+    charger(ecrire_csv(lignes, tmp_path / "seances.csv"), connexion)
 
 
 def test_generation_reproductible():
@@ -59,6 +58,5 @@ def test_transformation_corrige_exclut_et_calcule_la_charge(connexion, tmp_path)
 
 def test_le_rapport_dit_comment_chaque_defaut_est_traite(tmp_path):
     texte = executer(tmp_path).read_text(encoding="utf-8")
-    for mot in ["corrigé", "exclu", "signalé"]:
-        assert mot in texte
+    assert all(mot in texte for mot in ["corrigé", "exclu", "signalé"])
     assert "| A01 | 2026-09-28 |" in texte
