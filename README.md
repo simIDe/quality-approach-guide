@@ -1,33 +1,38 @@
-# Quality Approach : guide du mini-projet
+# Quality Approach: mini-project guide
 
-Guide de référence pour le mini-projet du cours Quality Approach (Master 2 STAPS, UFR STAPS Montpellier) : le brief, une liste de contrôle qualité, des fiches pratiques, des modèles de documents et un exemple qui fonctionne.
+Reference guide for the mini-project of the Quality Approach course (Master 2 STAPS, UFR STAPS Montpellier): the brief, a quality checklist, practical guides, document templates and a working example.
 
-**Le site : <https://simide.github.io/quality-approach-guide/>**
+**The site: <https://simide.github.io/quality-approach-guide/>**
 
-Ce dépôt se consulte, il ne se copie pas. Votre projet peut être organisé tout autrement.
+The site is in English, with a French translation available from the language menu.
 
-## Lancer le site en local
+This repository is meant to be consulted, not copied. Your project can be organised in a completely different way.
 
-Il faut [Node.js](https://nodejs.org/) 20 ou plus récent.
+## Running the site locally
+
+You need [Node.js](https://nodejs.org/) 20 or later.
 
 ```bash
 npm ci
-npm start
+npm start                  # English
+npm start -- --locale fr   # French
 ```
 
-Le site s'ouvre sur <http://localhost:3000/quality-approach-guide/>. Pour vérifier comme la CI : `node scripts/verifier-navigation.mjs` puis `npm run build`.
+The site opens at <http://localhost:3000/quality-approach-guide/>. The development server serves one language at a time; `npm run build` builds both. To check the site as the CI does: `node scripts/check-navigation.mjs` then `npm run build`.
 
-## Lancer l'exemple en local
+English pages live in `docs/`, their French translations in `i18n/fr/docusaurus-plugin-content-docs/current/`, with the same file names.
 
-Il faut Python 3.11 ou plus récent et [uv](https://docs.astral.sh/uv/). Depuis la racine du dépôt :
+## Running the example locally
+
+You need Python 3.11 or later and [uv](https://docs.astral.sh/uv/). From the root of the repository:
 
 ```bash
-uv run python exemples/charge-entrainement/lancer.py   # données, pipeline, contrôles, rapport
-uv run pytest -q                                       # tests
+uv run python examples/training-load/run.py   # data, pipeline, checks, report
+uv run pytest -q                              # tests
 ```
 
-Le rapport est écrit dans `exemples/charge-entrainement/sortie/rapport.md`. Voir le [README de l'exemple](exemples/charge-entrainement/README.md).
+The report is written to `examples/training-load/output/report.md`. See the [example's README](examples/training-load/README.md).
 
 ## Licence
 
-Code sous licence MIT, textes sous licence CC BY 4.0. Voir [LICENSE](LICENSE).
+Code under the MIT licence, texts under the CC BY 4.0 licence. See [LICENSE](LICENSE).
