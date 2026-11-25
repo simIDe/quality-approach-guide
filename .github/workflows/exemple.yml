@@ -1,0 +1,30 @@
+# Exemple : à chaque pull request et à chaque fusion sur main, on relance l'exemple
+# de bout en bout (données, pipeline, contrôles, rapport) puis les tests,
+# sur Linux, Windows et macOS.
+name: Exemple
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exemple:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+      - name: Installer l'environnement (versions figées par uv.lock)
+        run: uv sync --locked
+      - name: Lancer l'exemple en une commande
+        run: uv run python exemples/charge-entrainement/lancer.py
+      - name: Lancer les tests
+        run: uv run pytest -q
