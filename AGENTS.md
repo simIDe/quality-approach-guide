@@ -1,34 +1,36 @@
-# Consignes pour les agents de code
+# Instructions for coding agents
 
-## Le dépôt
+## The repository
 
-Ce dépôt est le guide du mini-projet du cours Quality Approach (Master 2 STAPS). Il contient un site de documentation (Docusaurus, dans `docs/`) et un exemple minimal de *data product* (dans `exemples/charge-entrainement/`). Toute la documentation est en français ; les termes techniques anglais usuels sont conservés et définis à leur première apparition.
+This repository is the guide for the mini-project of the Quality Approach course (Master 2 STAPS). It contains a documentation site (Docusaurus, in `docs/`) and a minimal *data product* example (in `examples/training-load/`). The documentation is in English, with a French translation in `i18n/fr/docusaurus-plugin-content-docs/current/` (same file names). Common technical terms are defined at their first use.
 
-## Commandes
+## Commands
 
 ```bash
-# Installer l'environnement Python
+# Install the Python environment
 uv sync
 
-# Lancer l'exemple de bout en bout
-uv run python exemples/charge-entrainement/lancer.py
+# Run the example end to end
+uv run python examples/training-load/run.py
 
-# Lancer les tests
+# Run the tests
 uv run pytest -q
 
-# Lancer le site en local
+# Run the site locally (one language at a time)
 npm ci
-npm start
+npm start                  # English
+npm start -- --locale fr   # French
 
-# Vérifier le site comme la CI
-node scripts/verifier-navigation.mjs
+# Check the site as the CI does
+node scripts/check-navigation.mjs
 npm run build
 ```
 
-## Règles
+## Rules
 
-- Ne pas inventer de données ni de sources.
-- Écrire les tests avant le code.
-- Ne jamais modifier un test pour le faire passer.
-- Ne jamais manipuler de données personnelles.
-- Proposer un plan avant une modification de plus d'un fichier.
+- Do not make up data or sources.
+- Write the tests before the code.
+- Never change a test to make it pass.
+- Never handle personal data.
+- Propose a plan before any change touching more than one file.
+- Any page change in docs/ must be mirrored in the French translation (i18n/fr/...), and vice versa.

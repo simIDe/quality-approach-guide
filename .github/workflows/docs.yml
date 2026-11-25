@@ -1,4 +1,4 @@
-# Site de documentation : construit à chaque pull request, publié à chaque fusion sur main.
+# Documentation site: built on every pull request, published on every merge to main.
 name: Site
 
 on:
@@ -7,43 +7,43 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Une seule publication à la fois ; une publication en cours n'est pas annulée.
+# One deployment at a time; a running deployment is not cancelled.
 concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  construire:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # pour la date de dernière mise à jour des pages
+          fetch-depth: 0 # for the pages' last-updated date
       - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Vérifier que chaque page est dans la navigation
-        run: node scripts/verifier-navigation.mjs
-      - name: Construire le site (échoue sur un lien ou une ancre cassés)
+      - name: Check every page is in the navigation, in both languages
+        run: node scripts/check-navigation.mjs
+      - name: Build the site in both languages (fails on a broken link or anchor)
         run: npm run build
       - uses: actions/upload-pages-artifact@v5
         with:
           path: build
 
-  publier:
+  deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: construire
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deploiement.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deploiement
+      - id: deployment
         uses: actions/deploy-pages@v5

@@ -1,9 +1,9 @@
-Ce dépôt est publié sous deux licences :
+This repository is released under two licences:
 
-- le code (scripts, exemples, configuration) sous licence MIT, texte ci-dessous ;
-- les textes de la documentation (dossier docs/ et fichiers Markdown) sous licence
-  Creative Commons Attribution 4.0 International (CC BY 4.0) :
-  https://creativecommons.org/licenses/by/4.0/legalcode.fr
+- the code (scripts, examples, configuration) under the MIT licence, text below;
+- the documentation texts (docs/, i18n/ and Markdown files) under the
+  Creative Commons Attribution 4.0 International licence (CC BY 4.0):
+  https://creativecommons.org/licenses/by/4.0/legalcode
 
 ----------------------------------------------------------------------
 

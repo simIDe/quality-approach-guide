@@ -1,0 +1,30 @@
+# Example: on every pull request and every merge into main, rerun the example
+# end to end (data, pipeline, checks, report) then the tests,
+# on Linux, Windows and macOS.
+name: Example
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  example:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.4.0 # exact version: there is no "v10" tag
+      - name: Install the environment (versions pinned by uv.lock)
+        run: uv sync --locked
+      - name: Run the example in one command
+        run: uv run python examples/training-load/run.py
+      - name: Run the tests
+        run: uv run pytest -q

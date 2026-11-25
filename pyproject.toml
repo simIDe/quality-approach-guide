@@ -1,8 +1,8 @@
-# Dépendances de l'exemple (le site, lui, est construit avec Node.js : voir package.json).
+# Dependencies of the example (the site itself is built with Node.js: see package.json).
 [project]
 name = "quality-approach-guide"
 version = "0.1.0"
-description = "Exemple minimal de data product du guide Quality Approach"
+description = "Minimal data product example of the Quality Approach guide"
 requires-python = ">=3.11"
 dependencies = []
 
@@ -13,5 +13,5 @@ dev = ["pytest>=8"]
 package = false
 
 [tool.pytest.ini_options]
-testpaths = ["exemples/charge-entrainement/tests"]
-pythonpath = ["exemples/charge-entrainement"]
+testpaths = ["examples/training-load/tests"]
+pythonpath = ["examples/training-load"]
