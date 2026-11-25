@@ -4,7 +4,7 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  guide: ['index'],
+  guide: ['index', 'exemple'],
 };
 
 export default sidebars;
