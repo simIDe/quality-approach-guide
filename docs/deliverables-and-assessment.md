@@ -1,32 +1,32 @@
 ---
-title: Attendus et évaluation
+title: Deliverables and assessment
 sidebar_position: 2
 ---
 
-# Attendus et évaluation
+# Deliverables and assessment
 
-## Les cinq attendus
+## The five deliverables
 
-Chaque attendu peut se démontrer de plusieurs façons, au choix du groupe.
+Each deliverable can be demonstrated in several ways, as the group chooses.
 
-| Attendu | Preuves possibles |
+| Deliverable | Possible evidence |
 | --- | --- |
-| Un utilisateur et une promesse | Fiche produit d'une page : pour qui, pour quelle décision, ce qui est garanti, ce qui ne l'est pas |
-| Un produit utilisable | Table documentée, tableau de bord, rapport, fichier publié, petite API |
-| La qualité des données | Critères choisis, contrôles effectués, défauts trouvés et traités, limites connues |
-| La qualité du travail | Historique versionné, projet relançable par un tiers, vérifications automatisées quand c'est possible, documentation |
-| Le recul sur la méthode | Journal de méthode : décisions, répartition du travail, usage de l'IA, ce qui a été rejeté ou corrigé |
+| A user and a promise | One-page product sheet: for whom, for which decision, what is guaranteed, what is not |
+| A usable product | Documented table, dashboard, report, published file, small API |
+| Data quality | Chosen criteria, checks carried out, defects found and handled, known limits |
+| Quality of the work | Versioned history, project rerunnable by someone else, automated checks where possible, documentation |
+| Stepping back on the method | Method log: decisions, division of work, use of AI, what was rejected or corrected |
 
-## La grille sur 20
+## The grading grid (out of 20)
 
-| Critère | Points | Ce qui est regardé |
+| Criterion | Points | What is looked at |
 | --- | --- | --- |
-| Cadrage | 3 | Utilisateur et promesse clairs, périmètre tenu simple, limites annoncées |
-| Qualité des données | 5 | Critères pertinents pour l'usage, contrôles réellement faits, défauts traités, origine tracée |
-| Qualité du travail | 5 | Projet compréhensible et relançable par un tiers, historique lisible, vérifications, documentation |
-| Recul sur la méthode | 4 | Journal de méthode, décisions justifiées, usage de l'IA maîtrisé, échecs analysés |
-| Oral et maîtrise individuelle | 3 | Clarté, démonstration, capacité de chacun à expliquer le projet |
+| Framing | 3 | Clear user and promise, scope kept simple, limits stated |
+| Data quality | 5 | Criteria relevant to the use, checks actually carried out, defects handled, origin traced |
+| Quality of the work | 5 | Project understandable and rerunnable by someone else, readable history, checks, documentation |
+| Stepping back on the method | 4 | Method log, justified decisions, controlled use of AI, failures analysed |
+| Oral presentation and individual command of the project | 3 | Clarity, demonstration, each member's ability to explain the project |
 
-Les outils choisis et la sophistication technique n'entrent pas dans la note.
+The tools chosen and technical sophistication do not count towards the grade.
 
-Le 20 janvier, chaque groupe tentera de relancer le projet d'un autre groupe en 10 minutes avec le seul README.
+On 20 January, each group will try to rerun another group's project in 10 minutes using only its README.

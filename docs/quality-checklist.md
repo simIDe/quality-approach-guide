@@ -1,33 +1,33 @@
 ---
-title: Liste de contrôle
+title: Checklist
 sidebar_position: 1
 ---
 
-# Liste de contrôle qualité
+# Quality checklist
 
-Deux listes de questions, à reprendre avant chaque livraison. Une réponse « non » n'est pas une faute : c'est une limite à corriger ou à annoncer.
+Two lists of questions, to go through again before each delivery. A "no" is not a mistake: it is a limit to fix or to state.
 
-## Les données
+## The data
 
-- [ ] **Exactitude :** les valeurs ont-elles été confrontées à des bornes plausibles (échelles, unités, dates) ?
-- [ ] **Complétude :** sait-on combien de valeurs ou de lignes manquent, et ce qu'on en fait ?
-- [ ] **Fraîcheur :** la date des données est-elle connue, et suffit-elle pour la décision de l'utilisateur ?
-- [ ] **Cohérence :** une même information a-t-elle le même nom, le même format et la même unité partout ?
-- [ ] **Unicité :** a-t-on vérifié qu'aucune ligne n'apparaît en double ?
-- [ ] **Origine :** chaque source est-elle notée, avec son adresse, sa licence et sa date de récupération ?
-- [ ] **Défauts :** chaque défaut trouvé est-il corrigé, exclu ou signalé, et ce choix est-il écrit ?
-- [ ] **Limites :** les limites connues sont-elles écrites là où l'utilisateur les lira ?
+- [ ] **Accuracy:** have the values been compared against plausible bounds (scales, units, dates)?
+- [ ] **Completeness:** do we know how many values or rows are missing, and what we do about them?
+- [ ] **Timeliness:** is the date of the data known, and is it recent enough for the user's decision?
+- [ ] **Consistency:** does the same piece of information have the same name, format and unit everywhere?
+- [ ] **Uniqueness:** have we checked that no row appears twice?
+- [ ] **Origin:** is each source written down, with its address, its licence and the date it was retrieved?
+- [ ] **Defects:** is each defect found corrected, excluded or flagged, and is that choice written down?
+- [ ] **Limits:** are the known limits written where the user will read them?
 
-## Le projet
+## The project
 
-Les six premières questions reprennent les caractéristiques d'un *data product* (produit de données conçu pour un utilisateur, avec une promesse) décrites par Zhamak Dehghani en 2019 : [How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html).
+The first six questions follow the characteristics of a *data product* (data designed for a user, with a promise) described by Zhamak Dehghani in 2019: [How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html).
 
-- [ ] **Trouvable** (*discoverable*) : l'utilisateur sait-il où trouver le produit ?
-- [ ] **Adressable** (*addressable*) : le produit a-t-il une adresse stable (chemin, URL, nom de table) ?
-- [ ] **Digne de confiance** (*trustworthy*) : la promesse et les contrôles qui la vérifient sont-ils visibles ?
-- [ ] **Auto-décrit** (*self-describing*) : chaque colonne ou champ est-il expliqué, par exemple dans un dictionnaire de données ?
-- [ ] **Interopérable** (*interoperable*) : la sortie est-elle dans un format ouvert et courant ?
-- [ ] **Sécurisé** (*secure*) : les secrets et les données personnelles sont-ils hors du dépôt et hors des échanges avec un modèle ?
-- [ ] **Relançable par un tiers :** quelqu'un hors du groupe peut-il relancer le projet avec le seul README ?
-- [ ] **Historique lisible :** les commits et les pull requests racontent-ils ce qui a été fait et pourquoi ?
-- [ ] **Vérifications automatiques :** les contrôles et les tests tournent-ils sans intervention à chaque modification ?
+- [ ] **Discoverable:** does the user know where to find the product?
+- [ ] **Addressable:** does the product have a stable address (path, URL, table name)?
+- [ ] **Trustworthy:** are the promise and the checks that verify it visible?
+- [ ] **Self-describing:** is each column or field explained, for example in a data dictionary?
+- [ ] **Interoperable:** is the output in an open, common format?
+- [ ] **Secure:** are secrets and personal data kept out of the repository and out of exchanges with a model?
+- [ ] **Rerunnable by someone else:** can someone outside the group rerun the project using only the README?
+- [ ] **Readable history:** do the commits and pull requests tell what was done and why?
+- [ ] **Automated checks:** do the checks and tests run without intervention on every change?

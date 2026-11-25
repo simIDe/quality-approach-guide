@@ -1,74 +1,74 @@
 ---
-title: Idées de projets
+title: Project ideas
 sidebar_position: 3
 ---
 
-# Idées de projets et jeux de données
+# Project ideas and datasets
 
-Des pistes pour démarrer, pas une liste imposée. Le sujet est libre : un autre utilisateur, une autre décision ou une autre source conviennent tout autant.
+Leads to get started, not a required list. The topic is open: another user, another decision or another source work just as well.
 
-## Quelques idées
+## A few ideas
 
-**Les équipements sportifs d'un territoire**
+**The sports facilities of an area**
 
-- *Utilisateur :* le service des sports d'une collectivité.
-- *Décision :* quels équipements rénover ou compléter en priorité.
-- *Source possible :* Data ES, le recensement des équipements sportifs (voir plus bas).
+- *User:* the sports department of a local authority.
+- *Decision:* which facilities to renovate or add first.
+- *Possible source:* Data ES, the French national census of sports facilities (see below).
 
-**Les licences par fédération, propres et documentées**
+**Licences by federation, clean and documented**
 
-- *Utilisateur :* un comité départemental ou régional qui suit la pratique licenciée.
-- *Décision :* où orienter ses actions de développement.
-- *Source possible :* les données de licences de l'INJEP (voir plus bas).
+- *User:* a departmental or regional committee that monitors licensed participation (the number of people holding a sports federation licence).
+- *Decision:* where to focus its development actions.
+- *Possible source:* the licence data from INJEP, the French national institute for youth and community education (see below).
 
-**Le suivi de la charge d'entraînement**
+**Monitoring training load**
 
-- *Utilisateur :* l'entraîneur d'un groupe d'athlètes.
-- *Décision :* ajuster la charge de la semaine suivante.
-- *Source possible :* des données simulées par un script, ou les propres séances du groupe. Des séances réelles de personnes identifiables sont des données personnelles, et la durée ou l'effort perçu peuvent toucher à la santé : voir la fiche 07 « Données personnelles » et le signaler dans la fiche produit.
+- *User:* the coach of a group of athletes.
+- *Decision:* adjusting the load for the following week.
+- *Possible source:* data simulated by a script, or the group's own sessions. Real sessions of identifiable people are personal data, and duration or perceived effort can relate to health: see guide 07 "Personal data" and mention it in the product sheet.
 
-**Le rapport automatique de résultats de compétition**
+**The automatic competition results report**
 
-- *Utilisateur :* les dirigeants d'un club.
-- *Décision :* quels résultats et quelles progressions mettre en avant après chaque compétition.
-- *Source possible :* les fichiers de résultats publiés par l'organisateur ou la fédération, après avoir vérifié qu'on a le droit de les réutiliser.
+- *User:* the managers of a club.
+- *Decision:* which results and which progressions to highlight after each competition.
+- *Possible source:* the results files published by the organiser or the federation, after checking that you are allowed to reuse them.
 
-**L'offre d'activités d'une commune**
+**The activities on offer in a town**
 
-- *Utilisateur :* un office municipal des sports.
-- *Décision :* quelles activités manquent sur la commune.
-- *Source possible :* Data ES, avec le référentiel d'activités physiques et sportives pour nommer les activités de façon homogène.
+- *User:* a municipal sports office.
+- *Decision:* which activities are missing in the town.
+- *Possible source:* Data ES, with the reference list of physical and sports activities to name activities consistently.
 
-## Jeux de données ouverts
+## Open datasets
 
-Avant d'utiliser un jeu de données, vérifiez sa licence et sa date de mise à jour sur sa page, et notez-les dans la fiche produit : ces informations changent. Les entrées ci-dessous ont été vérifiées le 25 novembre 2026.
+Before using a dataset, check its licence and its update date on its page, and write them down in the product sheet: this information changes. The entries below were checked on 25 November 2026.
 
-**Data ES : recensement des équipements sportifs et lieux de pratique (complet)**
+**Data ES: census of sports facilities and places of practice (complete)**
 
-- *Producteur :* ministère chargé des Sports.
-- *Adresse :* <https://www.data.gouv.fr/datasets/data-es-recensement-des-equipements-sportifs-et-lieux-de-pratique-complet-1>
-- *Licence :* Licence Ouverte v2.0.
-- *Mise à jour :* quotidienne (dernière le 23 novembre 2026).
-- *Portail de consultation :* <https://equipements.sports.gouv.fr/pages/accueil/>
+- *Producer:* the French ministry in charge of Sports.
+- *Address:* <https://www.data.gouv.fr/datasets/data-es-recensement-des-equipements-sportifs-et-lieux-de-pratique-complet-1> (in French)
+- *Licence:* Licence Ouverte v2.0 (the French government's open licence, compatible with CC BY).
+- *Updates:* daily (last on 23 November 2026).
+- *Browsing portal:* <https://equipements.sports.gouv.fr/pages/accueil/> (in French)
 
-**Données géocodées issues du recensement des licences et clubs auprès des fédérations sportives agréées par le ministère chargé des Sports**
+**Geocoded data from the census of licences and clubs of the sports federations approved by the ministry in charge of Sports**
 
-- *Producteur :* INJEP (Institut national de la jeunesse et de l'éducation populaire).
-- *Adresse :* <https://www.data.gouv.fr/datasets/donnees-geocodees-issues-du-recensement-des-licences-et-clubs-aupres-des-federations-sportives-agreees-par-le-ministere-charge-des-sports>
-- *Licence :* Licence Ouverte.
-- *Période :* fichiers de 2019 à 2023 ; dernière mise à jour le 29 décembre 2025.
-- *À savoir :* les licences sont comptées selon le lieu de résidence des licenciés, pas selon le lieu du club.
+- *Producer:* INJEP (Institut national de la jeunesse et de l'éducation populaire).
+- *Address:* <https://www.data.gouv.fr/datasets/donnees-geocodees-issues-du-recensement-des-licences-et-clubs-aupres-des-federations-sportives-agreees-par-le-ministere-charge-des-sports> (in French)
+- *Licence:* Licence Ouverte.
+- *Period:* files from 2019 to 2023; last updated on 29 December 2025.
+- *Worth knowing:* licences are counted by where the licence holders live, not by where the club is.
 
-**Recensement des licences et clubs sportifs 2025**
+**Census of sports licences and clubs 2025**
 
-- *Producteur :* INJEP.
-- *Adresse :* <https://injep.fr/donnee/recensement-des-licences-et-clubs-sportifs-2025/>
-- *Licence :* `À VÉRIFIER` (non indiquée sur la page).
-- *Publication :* 10 août 2026.
+- *Producer:* INJEP.
+- *Address:* <https://injep.fr/donnee/recensement-des-licences-et-clubs-sportifs-2025/> (in French)
+- *Licence:* `TO BE CHECKED` (not stated on the page).
+- *Published:* 10 August 2026.
 
-**Référentiel d'activités physiques et sportives**
+**Reference list of physical and sports activities**
 
-- *Producteur :* ministère chargé des Sports.
-- *Adresse :* <https://www.data.gouv.fr/datasets/referentiel-dactivites-physiques-et-sportives>
-- *Licence :* Licence Ouverte v2.0.
-- *Mise à jour :* dernière le 17 février 2026.
+- *Producer:* the French ministry in charge of Sports.
+- *Address:* <https://www.data.gouv.fr/datasets/referentiel-dactivites-physiques-et-sportives> (in French)
+- *Licence:* Licence Ouverte v2.0.
+- *Updates:* last on 17 February 2026.
